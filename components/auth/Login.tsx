@@ -21,7 +21,7 @@ import {
 import pawLogo from "../../public/images/paw-logo.png"
 import Link from 'next/link';
 
-const Login: React.FC<null> = () => {
+const Login: React.FC = () => {
   return (
     <Container>
       <LeftContainer>

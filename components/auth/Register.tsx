@@ -22,7 +22,7 @@ import {
 import pawLogo from "../../public/images/paw-logo.png"
 import Link from 'next/link';
 
-const Register: React.FC<null> = () => {
+const Register: React.FC = () => {
   return (
     <Container>
       <LeftContainer>
