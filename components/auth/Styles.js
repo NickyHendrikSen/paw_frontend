@@ -22,9 +22,15 @@ export const LogoSection = styled.div`
   top: 20px;
   left: 20px;
   height: 80px;
+
   img {
     width: auto;
     height: 100%;
+    transition-duration: 0.2s;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 `
 
