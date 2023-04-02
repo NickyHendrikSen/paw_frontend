@@ -4,6 +4,7 @@ import FormInput from '../form/FormInput'
 
 import { AiFillLock } from "react-icons/ai";
 import { IoIosMail } from "react-icons/io";
+import { BsFillPersonFill } from "react-icons/bs";
 
 import { 
   Container,
@@ -21,7 +22,7 @@ import {
 import pawLogo from "../../public/images/paw-logo.png"
 import Link from 'next/link';
 
-const Login: React.FC<null> = () => {
+const Register: React.FC<null> = () => {
   return (
     <Container>
       <LeftContainer>
@@ -35,11 +36,13 @@ const Login: React.FC<null> = () => {
         <MidSectionWrapper>
           <MidSection>
             <MidSectionContent>
-              <TitleText>LOGIN</TitleText>
+              <TitleText>REGISTER</TitleText>
+              <FormInput placeholder={"Name"} marginTop='25px' icon={<BsFillPersonFill />} width='60%'/>
               <FormInput placeholder={"Email"} marginTop='25px' icon={<IoIosMail />} width='60%'/>
               <FormInput placeholder={"Password"} marginTop='25px' icon={<AiFillLock />} width='60%' type={"password"}/>
-              <Info>Don't have an account? <Link href={"register"}>Register Now</Link></Info>
-              <LoginButton>LOGIN</LoginButton>
+              <FormInput placeholder={"Confirm Password"} marginTop='25px' icon={<AiFillLock />} width='60%' type={"password"}/>
+              <Info>Already have an account? <Link href={"login"}>Login Here</Link></Info>
+              <LoginButton>REGISTER</LoginButton>
             </MidSectionContent>
           </MidSection>
         </MidSectionWrapper>
@@ -48,4 +51,4 @@ const Login: React.FC<null> = () => {
   )
 }
 
-export default Login;
+export default Register;

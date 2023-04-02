@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import Login from "../components/auth/Login"
+import Register from '@/components/auth/Register'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <>
         <Head>
@@ -14,7 +14,7 @@ export default function LoginPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         </Head>
-      <Login />
+      <Register />
     </>
   )
 }
