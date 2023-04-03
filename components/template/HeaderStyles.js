@@ -8,9 +8,10 @@ export const Container = styled.header`
 export const TopContainer = styled.div`
   width: 100%;
   height: 71px;
-  padding: 12.5px 2% 15px 2%;
+  padding: 12.5px 20px 15px 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: var(--color-blue);
 `
 
@@ -31,13 +32,13 @@ export const LogoSection = styled.div`
 `
 
 export const SearchSection = styled.div`
-  width: 73%;
+  width: 100%;
 `
 
 export const CartSection = styled.div`
   position: relative;
   width: 36px;
-  margin-left: 1.5%;
+  margin-left: 25px;
   cursor: pointer;
 
   &:before {
@@ -61,7 +62,7 @@ export const CartSection = styled.div`
       display: block;
       position: absolute;
       top: -1px;
-      right: 5px;
+      right: -3px;
       width: 8px;
       height: 8px;
       border-radius: 50%;
@@ -104,7 +105,7 @@ export const CartSection = styled.div`
 export const CartNumber = styled.div`
   position: absolute;
   top: 2px;
-  left: -3px;
+  left: 0px;
   font-weight: bold;
   font-size: 12px;
   text-align: center;
@@ -119,5 +120,5 @@ export const LineDivider = styled.hr`
   border-left: 1px solid var(--color-gray);
   height: 50%;
   width: 20px;
-  margin-left: 1.5%;  
+  margin-left: 25px;
 `

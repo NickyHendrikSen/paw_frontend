@@ -36,8 +36,10 @@ const Header: React.FC = () => {
           <CartNumber>{itemCount > 9 ? "9+" : itemCount}</CartNumber>
         </CartSection>
         <LineDivider />
-        <Button text="Login" fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%"/>
-        <Button text="Register" fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px"/>
+        <Button href="login"
+          text="Login" fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%"/>
+        <Button href="register"
+          text="Register" fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px"/>
       </TopContainer>
     </Container>
   )
