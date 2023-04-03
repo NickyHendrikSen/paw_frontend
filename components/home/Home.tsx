@@ -1,11 +1,11 @@
+import Container from "../template/Container";
 import {
-  Container
 } from "./Styles"
 
 const Home: React.FC = () => {
   return (
     <Container>
-        This is home
+      
     </Container>
   )
 }

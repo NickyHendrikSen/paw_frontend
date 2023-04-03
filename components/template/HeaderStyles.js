@@ -1,8 +1,11 @@
 import styled from "styled-components"
 
-export const Container = styled.header`
+export const HeaderContainer = styled.header`
+  position: relative;
   height: 110px;
-  border-bottom: 1px solid var(--color-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+  z-index: 10;
+  box-shadow: 0px 2px 5px 1px var(--color-light-gray);
 `
 
 export const TopContainer = styled.div`
@@ -105,7 +108,7 @@ export const CartSection = styled.div`
 export const CartNumber = styled.div`
   position: absolute;
   top: 2px;
-  left: 0px;
+  left: 1px;
   font-weight: bold;
   font-size: 12px;
   text-align: center;
@@ -117,8 +120,34 @@ export const LineDivider = styled.hr`
   vertical-align: middle;
   border: none;
   background: none;
-  border-left: 1px solid var(--color-gray);
+  border-left: 1px solid var(--color-light-gray);
   height: 50%;
   width: 20px;
   margin-left: 25px;
+`
+
+export const BottomContainer = styled.div`
+  width: 100%;
+  height: 39px;
+`
+
+export const LinkWrapper = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+
+  a {
+    height: 100%;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: var(--color-gray);
+    text-decoration: none;
+    font-size: 14px;
+    transition-duration: 0.2s;
+
+    &:hover {
+      background-color: rgb(0,0,0,0.1);
+    }
+  }
 `

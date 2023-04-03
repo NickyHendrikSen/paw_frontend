@@ -3,25 +3,28 @@ import Image from "next/image";
 import FormInput from "../form/FormInput";
 
 import {
-    Container,
-    TopContainer,
-    LogoSection,
-    SearchSection,
-    CartSection,
-    CartNumber,
-    LineDivider
-  } from "./HeaderStyles"
+  HeaderContainer,
+  TopContainer,
+  LogoSection,
+  SearchSection,
+  CartSection,
+  CartNumber,
+  LineDivider,
+  BottomContainer,
+  LinkWrapper
+} from "./HeaderStyles"
   
 import pawLogo from "../../public/images/paw-logo.png"
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import Button from "../button/Button";
+import Container from "./Container";
 
 const Header: React.FC = () => {
   const itemCount = 50;
 
   return (
-    <Container>
+    <HeaderContainer>
       <TopContainer>
         <LogoSection>
           <Link href={"/"}>
@@ -41,7 +44,22 @@ const Header: React.FC = () => {
         <Button href="register"
           text="Register" fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px"/>
       </TopContainer>
-    </Container>
+      <BottomContainer>
+        <Container>
+          <LinkWrapper>
+            <Link href="products">
+              Products
+            </Link>
+            <Link href="location">
+              Our Location
+            </Link>
+            <Link href="about-us">
+              About Us
+            </Link>
+          </LinkWrapper>
+        </Container>
+      </BottomContainer>
+    </HeaderContainer>
   )
 }
   
