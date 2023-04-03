@@ -1,5 +1,7 @@
 :root {
   --color-blue: #00AED4;
+  --color-gray:  #D9D9D9;
+  --color-red: #FF4343;
 }
 
 * {

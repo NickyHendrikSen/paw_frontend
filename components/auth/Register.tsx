@@ -30,7 +30,7 @@ const Register: React.FC = () => {
       <RightContainer>
         <LogoSection>
           <Link href={"/"}>
-            <Image src={pawLogo} alt="not found"/>
+            <Image src={pawLogo} alt="logo"/>
           </Link>            
         </LogoSection>
         <MidSectionWrapper>
