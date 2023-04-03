@@ -21,6 +21,7 @@ import {
 
 import pawLogo from "../../public/images/paw-logo.png"
 import Link from 'next/link';
+import Button from '../button/Button';
 
 const Register: React.FC = () => {
   return (
@@ -42,7 +43,7 @@ const Register: React.FC = () => {
               <FormInput placeholder={"Password"} marginTop='25px' icon={<AiFillLock />} width='60%' type={"password"}/>
               <FormInput placeholder={"Confirm Password"} marginTop='25px' icon={<AiFillLock />} width='60%' type={"password"}/>
               <Info>Already have an account? <Link href={"login"}>Login Here</Link></Info>
-              <LoginButton>REGISTER</LoginButton>
+              <Button text="REGISTER" fontSize={15} width='200px' height='50px' marginTop='15px' fill={false}/>
             </MidSectionContent>
           </MidSection>
         </MidSectionWrapper>

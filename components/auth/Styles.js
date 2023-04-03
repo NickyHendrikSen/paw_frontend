@@ -81,25 +81,6 @@ export const Info = styled.div`
   }
 `
 
-export const LoginButton = styled.button`
-  border: 1px solid white;
-  width: 200px;
-  height: 50px;
-  background: transparent;
-  color: white;
-  font-family: Lato;
-  font-size: 15px;
-  margin-top: 15px;
-  cursor: pointer;
-  transition-duration: 0.2s;
-
-  &:hover {
-    font-size: 13px;
-    color: var(--color-blue);
-    background-color: white;
-  }
-`
-
 export const RightContainer = styled.div`
   padding: 40px;
   width: 50%;

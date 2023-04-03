@@ -7,12 +7,15 @@ import {
 interface ButtonProps {
   text: string,
   width?: string,
+  height?: string,
   marginTop?: string,
   marginBottom?: string,
   marginLeft?: string,
   marginRight?: string,
   paddingHorizontal?: string,
-  paddingVertical?: string, 
+  paddingVertical?: string,
+  fontSize: number,
+  fill: boolean
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
