@@ -19,9 +19,10 @@ interface ButtonProps {
   fill: boolean,
   href?: string,
   onClick?: Function,
+  type?: string,
 }
 
-const Button: React.FC<ButtonProps> = (props) => {
+const Button: React.FC<ButtonProps> = ({type="button", ...props}) => {
   const router = useRouter();
 
   const clicked = () => {

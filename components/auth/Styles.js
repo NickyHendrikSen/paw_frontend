@@ -52,7 +52,7 @@ export const MidSectionContent = styled.div`
   width: 480px;
   text-align: center;
 
-  & > div {
+  & > form > div {
     margin-left: auto;
     margin-right: auto;
   }

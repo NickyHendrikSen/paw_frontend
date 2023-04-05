@@ -1,25 +1,43 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useState } from "react"
 
 import { 
   InputContainer,
   IconWrapper,
   InputStyles
 } from "./FormInputStyles"
+import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form"
 
-interface PageProps {
+type FormInputProps = {
   type?: string,
+  name: string,
   placeholder?: string,
   width?: string,
   marginTop?: string,
   marginBottom?: string,
-  icon?: ReactNode
-}
+  icon?: ReactNode,
+  register?: UseFormRegisterReturn<any>
+  // register?: UseFormRegister<any>
+} & Record<string, any>
 
-const FormInput: React.FC<PageProps> = ({type = "text", placeholder, width="100%", marginTop = "0px", marginBottom = "0px", icon}) => {
+const FormInput: React.FC<FormInputProps> = 
+  ({type = "text", name, placeholder, width="100%", marginTop = "0px", marginBottom = "0px", icon, register}) => 
+{
+  // const [val, setVal] = useState("");
+
+  // const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const inputVal = e.target.value;
+  //   console.log(inputVal);
+  //   setVal(inputVal);
+  // }
+
   return (
     <InputContainer width={width} marginTop={marginTop} marginBottom={marginBottom}>
       {icon && <IconWrapper>{icon}</IconWrapper>}
-      <InputStyles type={type} placeholder={placeholder}/>
+      {/* <TextField 
+      {...restProps} placeholder={placeholder} type={type}  name={name}/> */}
+      <InputStyles placeholder={placeholder} type={type}  name={name} {...(register && {...register})}
+      // onChange={changeHandler} value={val}
+      />
     </InputContainer>
   )
 }
