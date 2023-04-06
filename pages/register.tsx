@@ -1,11 +1,24 @@
+import { useEffect, useContext } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Register from '@/components/auth/Register'
+import { AuthContext } from '@/store/AuthContext';
+import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RegisterPage() {
+  const router = useRouter()
+  const authContext = useContext(AuthContext)
+
+  useEffect(() => {
+    if(authContext?.isAuthenticated()) {
+      router.push("/")
+    }
+  })
+  if(authContext?.isAuthenticated()) return null;
+  
   return (
     <>
         <Head>

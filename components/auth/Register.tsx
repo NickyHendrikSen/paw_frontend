@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image'
 import Link from 'next/link';
 import Button from '../button/Button';
@@ -6,6 +8,10 @@ import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import FormInput from '../form/FormInput'
+import FormErrorText from '../form/FormErrorText';
+import { useAsync } from '@/utils/useAsync';
+import { UserAPI } from '@/api/apis/UserAPI';
+import { toast } from "react-toastify";
 
 import { AiFillLock } from "react-icons/ai";
 import { IoIosMail } from "react-icons/io";
@@ -24,13 +30,12 @@ import {
 } from "./Styles"
 
 import pawLogo from "../../public/images/paw-logo.png"
-import FormErrorText from '../form/FormErrorText';
 
 type RegisterFormValue = {
-  name?: string,
-  email?: string,
-  password?: string,
-  confirmPassword?: string  
+  name: string,
+  email: string,
+  password: string,
+  confirmPassword: string  
 }
 
 const schema = Yup.object().shape({
@@ -46,14 +51,22 @@ const schema = Yup.object().shape({
 
 const Register: React.FC = () => {
 
-  // const { onRegisterRequest, error, status } = props;
+  const { execute, error, status } = useAsync(UserAPI.register)
   const { register, handleSubmit, formState:{ errors } } = useForm<RegisterFormValue>({
     resolver: yupResolver(schema),
   });
+  const router = useRouter()
 
   const onSuccess = (data: RegisterFormValue) => {
-    console.log(data);
+    execute(data);
   };
+
+  useEffect(() => {
+    if(status === "success") {
+      toast.success("Successfully Signed Up!")
+      router.push("/login")
+    }
+  }, [status])
 
 
   return (

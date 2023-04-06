@@ -1,3 +1,5 @@
+import { useEffect, useContext } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image'
 import Link from 'next/link';
 import Button from '../button/Button';
@@ -6,6 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import FormInput from '../form/FormInput'
+import FormErrorText from '../form/FormErrorText';
+import { useAsync } from '@/utils/useAsync';
+import { UserAPI } from '@/api/apis/UserAPI';
+import { toast } from "react-toastify";
+import { AuthContext } from "../../store/AuthContext";
 
 import { AiFillLock } from "react-icons/ai";
 import { IoIosMail } from "react-icons/io";
@@ -23,11 +30,10 @@ import {
 } from "./Styles"
 
 import pawLogo from "../../public/images/paw-logo.png"
-import FormErrorText from '../form/FormErrorText';
 
 type LoginFormValue = {
-  email?: string,
-  password?: string
+  email: string,
+  password: string
 }
 
 const schema = Yup.object().shape({
@@ -38,14 +44,27 @@ const schema = Yup.object().shape({
 
 const Login: React.FC = () => {
 
-  // const { onRegisterRequest, error, status } = props;
+  const { execute, error, status, value } = useAsync(UserAPI.login)
   const { register, handleSubmit, formState:{ errors } } = useForm<LoginFormValue>({
     resolver: yupResolver(schema),
   });
+  const router = useRouter()
+  const authContext = useContext(AuthContext)
 
   const onSuccess = (data: LoginFormValue) => {
-    console.log(data);
+    execute(data);
   };
+
+  useEffect(() => {
+    if(status === "success") {
+      authContext?.login(value?.data?.token || null)
+      toast.success("Successfully Signed Up!")
+      router.push("/login")
+    }
+    if(status === "error") {
+      toast.error(error?.message);
+    }
+  }, [status])
 
   return (
     <Container>
