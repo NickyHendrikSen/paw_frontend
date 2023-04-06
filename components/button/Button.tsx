@@ -16,13 +16,13 @@ interface ButtonProps {
   paddingHorizontal?: string,
   paddingVertical?: string,
   fontSize: number,
-  fill: boolean,
+  fill?: boolean,
   href?: string,
   onClick?: Function,
   type?: string,
 }
 
-const Button: React.FC<ButtonProps> = ({type="button", ...props}) => {
+const Button: React.FC<ButtonProps> = ({type="button", fill, ...props}) => {
   const router = useRouter();
 
   const clicked = () => {
@@ -35,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({type="button", ...props}) => {
   }
 
   return (
-    <ButtonStyles {...props} onClick={clicked}>
+    <ButtonStyles {...props} onClick={clicked} fill={fill ? fill : undefined}>
       {props.text}
     </ButtonStyles>
   )

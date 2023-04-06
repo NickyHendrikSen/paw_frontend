@@ -1,6 +1,9 @@
 import styled from "styled-components"
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{
+  width?: string,
+  marginTop?: string,
+  marginBottom?: string,}>`
   display: flex;
   border-bottom: 1px solid white;
   ${props => props.width ? `width: ${props.width};` : `width: 100%;`}

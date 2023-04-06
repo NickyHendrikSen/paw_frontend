@@ -32,7 +32,7 @@ const Header: React.FC = () => {
           </Link>            
         </LogoSection>
         <SearchSection>
-          <FormInput placeholder="Search" icon={<AiOutlineSearch />}/>
+          <FormInput placeholder="Search" name="search" icon={<AiOutlineSearch />}/>
         </SearchSection>
         <CartSection hasItem={itemCount > 0 ? true: false}>
           <FaShoppingCart />

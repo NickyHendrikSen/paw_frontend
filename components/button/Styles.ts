@@ -1,6 +1,17 @@
 import styled from "styled-components"
 
-export const ButtonStyles = styled.button`
+export const ButtonStyles = styled.button<{
+  width?: string,
+  height?: string,
+  marginTop?: string,
+  marginBottom?: string,
+  marginLeft?: string,
+  marginRight?: string,
+  paddingHorizontal?: string,
+  paddingVertical?: string,
+  fontSize: number,
+  fill?: boolean,
+}>`
   padding: 8px 16px;
   cursor: pointer;
   ${props => props.width && `width: ${props.width};`}    

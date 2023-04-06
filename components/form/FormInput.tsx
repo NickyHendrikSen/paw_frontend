@@ -9,7 +9,7 @@ import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form"
 
 type FormInputProps = {
   type?: string,
-  name: string,
+  name?: string,
   placeholder?: string,
   width?: string,
   marginTop?: string,
@@ -20,7 +20,7 @@ type FormInputProps = {
 } & Record<string, any>
 
 const FormInput: React.FC<FormInputProps> = 
-  ({type = "text", name, placeholder, width="100%", marginTop = "0px", marginBottom = "0px", icon, register}) => 
+  ({type = "text", name = "", placeholder, width="100%", marginTop = "0px", marginBottom = "0px", icon, register}) => 
 {
   // const [val, setVal] = useState("");
 

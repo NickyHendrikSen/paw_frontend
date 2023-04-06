@@ -38,7 +38,7 @@ export const SearchSection = styled.div`
   width: 100%;
 `
 
-export const CartSection = styled.div`
+export const CartSection = styled.div<{hasItem: boolean}>`
   position: relative;
   width: 36px;
   margin-left: 25px;
