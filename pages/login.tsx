@@ -1,7 +1,5 @@
 import { useEffect, useContext } from 'react';
-import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Login from "../components/auth/Login"
 import { AuthContext } from '@/store/AuthContext';
