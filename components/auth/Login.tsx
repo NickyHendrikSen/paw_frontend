@@ -38,6 +38,7 @@ const schema = Yup.object().shape({
 
 const Login: React.FC = () => {
 
+  // const { onRegisterRequest, error, status } = props;
   const { register, handleSubmit, formState:{ errors } } = useForm<LoginFormValue>({
     resolver: yupResolver(schema),
   });

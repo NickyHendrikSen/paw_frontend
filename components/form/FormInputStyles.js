@@ -38,3 +38,8 @@ export const InputStyles = styled.input`
     color: rgba(255,255,255,0.5);
   }
 `
+
+export const ErrorStyles = styled.div`
+  color: var(--color-red);
+  font-size:
+`
