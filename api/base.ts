@@ -11,10 +11,10 @@ export const axiosClient = axios.create({
     baseURL: apiURL,
 });
 
-axiosClient.interceptors.request.use((req) => {
-    req.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-    return req;
-})
+// axiosClient.interceptors.request.use((req) => {
+//     req.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+//     return req;
+// })
 
 export const APISettings = {
     setAPIToken: (token: string, handleTokenExpired: () => unknown) => {

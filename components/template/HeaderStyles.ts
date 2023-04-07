@@ -147,7 +147,39 @@ export const LinkWrapper = styled.div`
     transition-duration: 0.2s;
 
     &:hover {
-      background-color: rgb(0,0,0,0.1);
+      background-color: rgb(0,0,0,0.05);
+    }
+  }
+`
+
+export const DropdownItem = styled.div`
+  opacity: 0;
+  overflow: hidden;
+  height: 0;
+  display: flex;
+  position: absolute;
+  top: 100%;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0px 1px 5px 1px var(--color-light-gray);
+  transition-duration: 0.2s;
+  & > a {
+    width: 100%;
+  }
+`
+
+export const Dropdown = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  &:hover {
+    ${DropdownItem} {
+      opacity: 1;
+      height: 100%;
+    }
+    & > a {
+      background-color: rgb(0,0,0,0.05);
     }
   }
 `

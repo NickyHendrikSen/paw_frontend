@@ -11,7 +11,9 @@ import {
   CartNumber,
   LineDivider,
   BottomContainer,
-  LinkWrapper
+  LinkWrapper,
+  Dropdown,
+  DropdownItem
 } from "./HeaderStyles"
   
 import pawLogo from "../../public/images/paw-logo.png"
@@ -30,6 +32,10 @@ const Header: React.FC = () => {
 
   const handleLogout = () => {
     authContext?.logout()
+  }
+
+  const handleSearch = () => {
+    
   }
 
   return (
@@ -63,9 +69,31 @@ const Header: React.FC = () => {
       <BottomContainer>
         <Container>
           <LinkWrapper>
-            <Link href="products">
-              Products
-            </Link>
+            <Dropdown>
+              <Link href="products">
+                Products
+              </Link>
+                <DropdownItem>
+                <Link href="products?categories=apparel">
+                  Apparel
+                </Link>
+                <Link href="products?categories=collar">
+                  Collars
+                </Link>
+                <Link href="products?categories=treat">
+                  Treats
+                </Link>
+                <Link href="products?categories=leash">
+                  Leashes
+                </Link>
+                <Link href="products?categories=toy">
+                  Toys
+                </Link>
+                <Link href="products?categories=food">
+                  Food
+                </Link>
+              </DropdownItem>
+            </Dropdown>
             <Link href="location">
               Our Location
             </Link>
