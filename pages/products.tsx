@@ -1,22 +1,33 @@
 import Head from 'next/head'
 import Login from "../components/Auth/Login"
 import { useRouter } from 'next/router'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@/components/Template/Header';
+import Products from '@/components/Products/Products';
+
+type ParamsStateType = {
+  categories: string,
+  search: string
+}
 
 export default function ProductsPage() {
 
   const router = useRouter();
-  const query = router.query;
+  const { query, isReady } = router;
+  const { categories: paramCategories, search: paramSearch } = query;
+  const [params, setParams] = useState<ParamsStateType | undefined>()
 
   useEffect(() => {
-    const categories = query['categories'];
-    if(typeof categories === "string"){
-      console.log(categories.split(","));
-    }
-  }, [query])
-  
+    if(!isReady) return;
 
+    const categories = paramCategories ? paramCategories.toString() : ""
+    const search = paramSearch ? paramSearch.toString() : "";
+    
+    setParams({categories: categories, search: search})
+  }, [isReady])
+  
+  if(!params) return null;
+  
   return (
     <>
       <Head>
@@ -26,6 +37,7 @@ export default function ProductsPage() {
       <link rel="icon" href="/favicon.ico" />
       </Head> 
       <Header />
+      <Products params={params}/>
     </>
   )
 }

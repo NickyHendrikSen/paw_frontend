@@ -29,7 +29,7 @@ export const useAsync = <T, I, E = ErrorType>(
           }
         })
         .catch((error: any) => {
-          setError(error.response.data);
+          setError(error?.response?.data);
           setStatus("error");
         });
     }, [asyncFunction]);
