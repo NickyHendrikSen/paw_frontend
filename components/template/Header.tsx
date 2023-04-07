@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import FormInput from "../form/FormInput";
+import FormInput from "../Form/FormInput";
 
 import {
   HeaderContainer,
@@ -17,11 +17,20 @@ import {
 import pawLogo from "../../public/images/paw-logo.png"
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
-import Button from "../button/Button";
+import Button from "../Button/Button";
 import Container from "./Container";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "@/store/AuthContext";
 
 const Header: React.FC = () => {
   const itemCount = 50;
+  const router = useRouter()
+  const authContext = useContext(AuthContext)
+
+  const handleLogout = () => {
+    authContext?.logout()
+  }
 
   return (
     <HeaderContainer>
@@ -39,10 +48,17 @@ const Header: React.FC = () => {
           <CartNumber>{itemCount > 9 ? "9+" : itemCount}</CartNumber>
         </CartSection>
         <LineDivider />
-        <Button href="login"
-          text="Login" fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%"/>
-        <Button href="register"
-          text="Register" fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px"/>
+        {authContext?.isAuthenticated() ?
+          <Button onClick={handleLogout}
+          text="Logout" fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%"/>
+           :
+          <>
+            <Button href="login"
+              text="Login" fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%"/>
+            <Button href="register"
+              text="Register" fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px"/>
+          </>
+        }
       </TopContainer>
       <BottomContainer>
         <Container>

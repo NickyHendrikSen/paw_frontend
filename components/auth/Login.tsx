@@ -2,13 +2,13 @@ import { useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 import Link from 'next/link';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import FormInput from '../form/FormInput'
-import FormErrorText from '../form/FormErrorText';
+import FormInput from '../Form/FormInput'
+import FormErrorText from '../Form/FormErrorText';
 import { useAsync } from '@/utils/useAsync';
 import { UserAPI } from '@/api/apis/UserAPI';
 import { toast } from "react-toastify";
@@ -58,7 +58,7 @@ const Login: React.FC = () => {
   useEffect(() => {
     if(status === "success") {
       authContext?.login(value?.data?.token || null)
-      toast.success("Successfully Signed Up!")
+      toast.success("Successfully Logged In!")
       router.push("/login")
     }
     if(status === "error") {

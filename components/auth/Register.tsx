@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 import Link from 'next/link';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import FormInput from '../form/FormInput'
-import FormErrorText from '../form/FormErrorText';
+import FormInput from '../Form/FormInput'
+import FormErrorText from '../Form/FormErrorText';
 import { useAsync } from '@/utils/useAsync';
 import { UserAPI } from '@/api/apis/UserAPI';
 import { toast } from "react-toastify";
@@ -63,7 +63,7 @@ const Register: React.FC = () => {
 
   useEffect(() => {
     if(status === "success") {
-      toast.success("Successfully Signed Up!")
+      toast.success("Successfully Registered!")
       router.push("/login")
     }
   }, [status])

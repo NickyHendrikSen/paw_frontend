@@ -1,11 +1,9 @@
 import { useEffect, useContext } from 'react';
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import Login from "../components/auth/Login"
+import Login from "../components/Auth/Login"
 import { AuthContext } from '@/store/AuthContext';
 import { useRouter } from 'next/router';
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function LoginPage() {
   const router = useRouter()

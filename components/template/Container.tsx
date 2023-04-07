@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import FormInput from "../form/FormInput";
+import FormInput from "../Form/FormInput";
 
 import {
     ContainerStyles
