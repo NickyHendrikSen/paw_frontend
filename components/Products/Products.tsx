@@ -9,12 +9,12 @@ import { ReactSVG } from 'react-svg'
 
 import {
   ProductList,
-  TitleText,
   SearchText,
   ProductBar,
   GridOption,
   GridOptionItem
 } from "./Styles"
+import { TitleText } from '@/styles/Typography';
 
 type ProductsProps = {
   params: {
@@ -25,7 +25,7 @@ type ProductsProps = {
 
 const Products: React.FC<ProductsProps> = ({params}) => {
     const { execute, error, status, value: products } = useAsync(ProductAPI.getProducts)
-    const [ gridOption, setGridOption ] = useState<"grid" | "list">("list")
+    const [ gridOption, setGridOption ] = useState<"grid" | "list">("grid")
     const router = useRouter()
 
     const handleGridChange = (grid: string) => {

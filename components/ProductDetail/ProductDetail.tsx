@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useAsync } from "@/utils/useAsync";
 import Container from "../Template/Container";
 import { ProductAPI } from "@/api/apis/ProductAPI";
 import { useRouter } from "next/router";
-import Image from 'next/image';
-import { ReactSVG } from 'react-svg'
+import Button from '../Button/Button';
+import { BoldText } from '@/styles/Typography';
+import FormInput from '../Form/FormInput';
+import { AiOutlineShareAlt } from 'react-icons/ai';
+import copyToClipboard from '@/utils/copyToClipboard';
+import { toast } from 'react-toastify';
+import { CartAPI } from '@/api/apis/CartAPI';
+import { AuthContext } from '@/store/AuthContext';
 
 import {
   Wrapper,
@@ -22,13 +28,6 @@ import {
   StockSection,
   AddToCartSection,
 } from "./ProductDetailStyles"
-import Button from '../Button/Button';
-import { BoldText } from '@/styles/Typography';
-import FormInput from '../Form/FormInput';
-import { AiOutlineShareAlt } from 'react-icons/ai';
-import copyToClipboard from '@/utils/copyToClipboard';
-import { toast } from 'react-toastify';
-import { CartAPI } from '@/api/apis/CartAPI';
 
 type ProductsProps = {
   productId: string
@@ -58,6 +57,7 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
     price: 0,
   })
   const router = useRouter()
+  const authContext = useContext(AuthContext)
 
   const quantityChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(!product.stock) return;
@@ -84,10 +84,15 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
   }
 
   const handleAddToCart = () => {
-    executeCart({
-      productId: product._id,
-      quantity: quantity
-    })
+    if(authContext?.isAuthenticated()) {
+      executeCart({
+        productId: product._id,
+        quantity: quantity
+      })
+    }
+    else {
+      router.push("/login")
+    }
   }
 
   useEffect(() => {

@@ -46,6 +46,10 @@ const Header: React.FC = () => {
     if(event.target.value) setSearch(event.target.value.toString());
   }
 
+  const toCart = () => {
+    router.push("/cart");
+  }
+
   return (
     <HeaderContainer>
       <TopContainer>
@@ -58,7 +62,7 @@ const Header: React.FC = () => {
           <FormInput placeholder="Search" name="search" icon={<AiOutlineSearch />} 
             onKeyPress={handleSearch} onChange={handleSearchChange}/>
         </SearchSection>
-        <CartSection hasItem={itemCount > 0 ? true: false}>
+        <CartSection hasItem={itemCount > 0 ? true: false} onClick={toCart}>
           <FaShoppingCart />
           <CartNumber>{itemCount > 9 ? "9+" : itemCount}</CartNumber>
         </CartSection>
@@ -68,9 +72,9 @@ const Header: React.FC = () => {
             fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%">Logout</Button>
            :
           <>
-            <Button href="login"
+            <Button href="/login"
               fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%">Login</Button>
-            <Button href="register"
+            <Button href="/register"
               fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px">Register</Button>
           </>
         }
@@ -103,10 +107,10 @@ const Header: React.FC = () => {
                 </Link>
               </DropdownItem>
             </Dropdown>
-            <Link href="location">
+            <Link href="/location">
               Our Location
             </Link>
-            <Link href="about-us">
+            <Link href="/about-us">
               About Us
             </Link>
           </LinkWrapper>
