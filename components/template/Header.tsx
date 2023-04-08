@@ -38,7 +38,7 @@ const Header: React.FC = () => {
 
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      router.push(`products?search=${search}`)
+      router.push(`/products?search=${search}`)
     }
   }
 
@@ -65,13 +65,13 @@ const Header: React.FC = () => {
         <LineDivider />
         {authContext?.isAuthenticated() ?
           <Button onClick={handleLogout}
-          text="Logout" fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%"/>
+            fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%">Logout</Button>
            :
           <>
             <Button href="login"
-              text="Login" fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%"/>
+              fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%">Login</Button>
             <Button href="register"
-              text="Register" fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px"/>
+              fill={true} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="7px">Register</Button>
           </>
         }
       </TopContainer>
@@ -79,26 +79,26 @@ const Header: React.FC = () => {
         <Container>
           <LinkWrapper>
             <Dropdown>
-              <Link href="products">
+              <Link href="/products">
                 Products
               </Link>
                 <DropdownItem>
-                <Link href="products?categories=apparel">
+                <Link href="/products?categories=apparel">
                   Apparel
                 </Link>
-                <Link href="products?categories=collar">
+                <Link href="/products?categories=collar">
                   Collars
                 </Link>
-                <Link href="products?categories=treat">
+                <Link href="/products?categories=treat">
                   Treats
                 </Link>
-                <Link href="products?categories=leash">
+                <Link href="/products?categories=leash">
                   Leashes
                 </Link>
-                <Link href="products?categories=toy">
+                <Link href="/products?categories=toy">
                   Toys
                 </Link>
-                <Link href="products?categories=food">
+                <Link href="/products?categories=food">
                   Food
                 </Link>
               </DropdownItem>

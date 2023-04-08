@@ -3,9 +3,11 @@ import styled from "styled-components"
 export const InputContainer = styled.div<{
   width?: string,
   marginTop?: string,
-  marginBottom?: string,}>`
+  marginBottom?: string,
+  isDark: boolean
+  }>`
   display: flex;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid ${props => props.isDark ? 'black;' : 'white;'};;
   ${props => props.width ? `width: ${props.width};` : `width: 100%;`}
   ${props => props.marginTop && `margin-top: ${props.marginTop};`}
   ${props => props.marginBottom && `margin-bottom: ${props.marginBottom};`}
@@ -16,9 +18,9 @@ export const InputContainer = styled.div<{
   }
 `
 
-export const IconWrapper = styled.div`
+export const IconWrapper = styled.div<{isDark: boolean}>`
   display: inline-block;
-  color: white;
+  color: ${props => props.isDark ? 'black;' : 'white;'};;
   vertical-align: middle;
   svg {
     height: 100%;
@@ -28,13 +30,13 @@ export const IconWrapper = styled.div`
   margin-left: 3px;
 `
 
-export const InputStyles = styled.input`
+export const InputStyles = styled.input<{isDark: boolean}>`
   width: 100%;
   font-size: 18px;
   border: none;
   background: none;
   outline: none;
-  color: white;
+  color: ${props => props.isDark ? 'black;' : 'white;'};
   padding: 5px 2px;
   
   &::placeholder {

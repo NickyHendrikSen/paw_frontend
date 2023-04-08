@@ -93,7 +93,7 @@ const Register: React.FC = () => {
                 <FormInput placeholder={"Confirm Password"} marginTop='25px' icon={<AiFillLock />} width='60%' type={"password"} name="confirmPassword" register={register("confirmPassword")}/>
                 <FormErrorText>{errors.confirmPassword?.message}</FormErrorText>
                 <Info>Already have an account? <Link href={"login"}>Login Here</Link></Info>
-                <Button text="REGISTER" fontSize={15} width='200px' height='50px' marginTop='15px' fill={false} type="submit"/>
+                <Button fontSize={15} width='200px' height='50px' marginTop='15px' fill={false} type="submit">REGISTER</Button>
               </form>
             </MidSectionContent>
           </MidSection>

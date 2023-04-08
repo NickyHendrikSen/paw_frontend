@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const NameSection = styled.div`
   color: black;
   font-size: 18px;
+  font-weight: bold;
 `
 export const PriceSection = styled.div`
   color: var(--color-green);

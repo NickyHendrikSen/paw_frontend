@@ -1,8 +1,4 @@
-import { useEffect } from 'react';
-import { useAsync } from "@/utils/useAsync";
-import { ProductAPI } from "@/api/apis/ProductAPI";
 import { useRouter } from "next/router";
-import { toast } from 'react-toastify';
 
 import {
   Wrapper,
@@ -17,6 +13,7 @@ import {
 } from "./ProductDisplayStyles"
 
 type ProductProps = {
+  id: string,
   name: string,
   price: Number,
   imageUrl: string,
@@ -25,11 +22,20 @@ type ProductProps = {
   gridOption: "grid" | "list"
 }
 
-const ProductDisplay: React.FC<ProductProps> = ({name = "", price = 0, imageUrl = "", stock = 0, description = "", gridOption}) => {
+const ProductDisplay: React.FC<ProductProps> = ({
+    id = "", name = "", price = 0, imageUrl = "", stock = 0, description = "", gridOption
+  }) => {
+  const router = useRouter();
+
   const isLastStock = stock === 1;
   const isSoldOut = stock === 0;
+
+  const goToDetails = () => {
+    router.push(`product/${id}`)
+  }
+
   return (
-    <Wrapper isSoldOut={isSoldOut} gridOption={gridOption}>
+    <Wrapper isSoldOut={isSoldOut} gridOption={gridOption} onClick={goToDetails}>
       {isLastStock && <LastStock>Last Stock</LastStock>}
       {isSoldOut && <SoldOut>Sold Out</SoldOut>}
       <ImageSection><img src={`http://localhost:8000/${imageUrl}`} alt="Product Image"/></ImageSection>

@@ -64,6 +64,7 @@ const Products: React.FC<ProductsProps> = ({params}) => {
           products?.data?.map((v: any) => 
           (
             <ProductDisplay 
+              id={v._id}
               name={v.name}
               price={v.price}
               imageUrl={v.imageUrl}  

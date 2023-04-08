@@ -13,14 +13,10 @@ export const ProductAPI = {
       }})
       return response;
     },
-    login: async(params: {
-      email: string,
-      password: string,
+    getProduct: async(params: {
+      productId: string,
     }) => {
-      const response = await axiosClient.post('/login', {
-          email: params.email,
-          password: params.password
-        })
+      const response = await axiosClient.get(`/product/${params.productId}`);
       return response;
     },
 }

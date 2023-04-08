@@ -6,7 +6,7 @@ import {
 } from "./Styles"
 
 interface ButtonProps {
-  text: string,
+  children?: any,
   width?: string,
   height?: string,
   marginTop?: string,
@@ -36,7 +36,7 @@ const Button: React.FC<ButtonProps> = ({type="button", fill, ...props}) => {
 
   return (
     <ButtonStyles {...props} onClick={clicked} fill={fill ? fill : undefined}>
-      {props.text}
+      {props.children}
     </ButtonStyles>
   )
 }

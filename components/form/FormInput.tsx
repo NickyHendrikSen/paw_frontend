@@ -15,12 +15,15 @@ type FormInputProps = {
   marginTop?: string,
   marginBottom?: string,
   icon?: ReactNode,
-  register?: UseFormRegisterReturn<any>
+  register?: UseFormRegisterReturn<any>,
+  isDark?: boolean
   // register?: UseFormRegister<any>
 } & Record<string, any>
 
 const FormInput: React.FC<FormInputProps> = 
-  ({type = "text", name = "", placeholder, width="100%", marginTop = "0px", marginBottom = "0px", icon, register, ...restProps}) => 
+  ({type = "text", name = "", placeholder, width="100%", 
+    marginTop = "0px", marginBottom = "0px", icon, register, 
+    isDark = false, ...restProps}) => 
 {
   // const [val, setVal] = useState("");
 
@@ -31,12 +34,12 @@ const FormInput: React.FC<FormInputProps> =
   // }
 
   return (
-    <InputContainer width={width} marginTop={marginTop} marginBottom={marginBottom}>
-      {icon && <IconWrapper>{icon}</IconWrapper>}
+    <InputContainer width={width} marginTop={marginTop} marginBottom={marginBottom} isDark={isDark}>
+      {icon && <IconWrapper isDark={isDark}>{icon}</IconWrapper>}
       {/* <TextField 
       {...restProps} placeholder={placeholder} type={type}  name={name}/> */}
       <InputStyles placeholder={placeholder} type={type}  name={name} 
-        {...(register && {...register})} {...restProps}
+        {...(register && {...register})} {...restProps} isDark={isDark}
       // onChange={changeHandler} value={val}
       />
     </InputContainer>
