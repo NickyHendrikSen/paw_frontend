@@ -28,23 +28,45 @@ import FormInput from '../Form/FormInput';
 import { AiOutlineShareAlt } from 'react-icons/ai';
 import copyToClipboard from '@/utils/copyToClipboard';
 import { toast } from 'react-toastify';
+import { CartAPI } from '@/api/apis/CartAPI';
 
 type ProductsProps = {
   productId: string
 }
 
+type Product = {
+  _id: string,
+  name: string,
+  imageUrl: string,
+  description: string,
+  category: string,
+  stock: number,
+  price: number,
+}
+
 const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
-  const { execute, error, status, value: response } = useAsync(ProductAPI.getProduct)
+  const { execute: executeProduct, status, value: response } = useAsync(ProductAPI.getProduct)
+  const { execute: executeCart, error: errorCart, status: statusCart, value: responseCart } = useAsync(CartAPI.addToCart)
   const [ quantity, setQuantity ] = useState<number>(1);
+  const [ product, setProduct ] = useState<Product>({
+    _id: productId,
+    name: "",
+    imageUrl: "",
+    description: "",
+    category: "",
+    stock: 0,
+    price: 0,
+  })
   const router = useRouter()
 
   const quantityChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(!product.stock) return;
     const val = parseInt(e.target.value.toString());
 
     if(typeof val !== "number") return;
     
-    if(val > response?.data?.product?.stock) {
-      setQuantity(response?.data?.product?.stock)
+    if(val > product?.stock) {
+      setQuantity(product?.stock)
     }
     else if(val < 1){
       setQuantity(1)
@@ -61,42 +83,61 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
     }
   }
 
+  const handleAddToCart = () => {
+    executeCart({
+      productId: product._id,
+      quantity: quantity
+    })
+  }
+
   useEffect(() => {
     if(status === "success") {
+      setProduct(response?.data?.product);
     }
   }, [status])
 
   useEffect(() => {
-      execute({productId})
+    if(statusCart === "success") {
+      toast.success("Product added to cart!");
+      router.push("/products");
+    }
+    if(statusCart === "error") {
+      console.log(errorCart);
+      toast.error(errorCart?.message);
+    }
+  }, [statusCart])
+
+  useEffect(() => {
+      executeProduct({productId})
   }, [productId]);
 
   return (
     <Container paddingTop='50px'>
       <Wrapper>
-        <ImageSection><img src={`http://localhost:8000/${response?.data?.product?.imageUrl}`} alt="Product Image"/></ImageSection>
+        <ImageSection><img src={`http://localhost:8000/${product?.imageUrl}`} alt="Product Image"/></ImageSection>
         <InfoSection>
-          <NameSection>{response?.data?.product?.name}</NameSection>
-          <CategorySection>{response?.data?.product?.category}</CategorySection>
-          <PriceSection>${response?.data?.product?.price.toFixed(2)}</PriceSection>
-          <DescriptionSection>{response?.data?.product?.description}</DescriptionSection>
+          <NameSection>{product?.name}</NameSection>
+          <CategorySection>{product?.category}</CategorySection>
+          <PriceSection>${product?.price.toFixed(2)}</PriceSection>
+          <DescriptionSection>{product?.description}</DescriptionSection>
         </InfoSection>
         <CartSection>
           <CartWrapper>
             <CartInner>
               <AddToCartText>Add to cart</AddToCartText>
-              <StockSection>Stock : <BoldText>{response?.data?.product?.stock.toString()}</BoldText></StockSection>
-              <FormInput type='number' min={1} max={response?.data?.product?.stock} isDark={true}
+              <StockSection>Stock : <BoldText>{product?.stock.toString()}</BoldText></StockSection>
+              <FormInput type='number' min={1} max={product?.stock} isDark={true}
                 value={quantity.toString()} onChange={quantityChanged}/>
               <SubTotalSection>
                 <span className='text'>Subtotal</span>
-                <span className='total'>${(response?.data?.product?.price * Math.max(1, quantity)).toFixed(2)}</span>
+                <span className='total'>${(product?.price * Math.max(1, quantity)).toFixed(2)}</span>
               </SubTotalSection>
             </CartInner>
             <AddToCartSection>
               <Button paddingHorizontal='10px;' paddingVertical='10px' fontSize={15} fill={false} onClick={shareClicked}>
                 <AiOutlineShareAlt />Share
               </Button>
-              <Button paddingHorizontal='10px;' paddingVertical='10px' fontSize={15} fill={true}>Add To Cart</Button>
+              <Button paddingHorizontal='10px;' paddingVertical='10px' fontSize={15} fill={true} onClick={handleAddToCart}>Add To Cart</Button>
             </AddToCartSection>
           </CartWrapper>
         </CartSection>

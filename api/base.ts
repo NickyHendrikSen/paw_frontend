@@ -19,7 +19,7 @@ export const axiosClient = axios.create({
 export const APISettings = {
     setAPIToken: (token: string, handleTokenExpired: () => unknown) => {
         axiosClient.interceptors.request.use((req) => {
-            req.headers["x-access-token"] = token
+            req.headers["Authorization"] = 'Bearer ' + token
             return req;
         })
 
@@ -31,10 +31,11 @@ export const APISettings = {
                 if ( error && error.response?.data === "Invalid Token" ) {
                     handleTokenExpired()
                 }
-                if(error.response?.data) {
-                    toast.error(error.response?.data);
-                }
+                // if(error.response?.data) {
+                //     toast.error(error.response?.data);
+                // }
             }
+            throw error;
         })
     }
 }
