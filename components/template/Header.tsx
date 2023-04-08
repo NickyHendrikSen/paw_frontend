@@ -22,7 +22,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import Button from "../Button/Button";
 import Container from "./Container";
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/store/AuthContext";
 
 const Header: React.FC = () => {
@@ -30,12 +30,20 @@ const Header: React.FC = () => {
   const router = useRouter()
   const authContext = useContext(AuthContext)
 
+  const [search, setSearch] = useState<string>("");
+
   const handleLogout = () => {
     authContext?.logout()
   }
 
-  const handleSearch = () => {
-    
+  const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      router.push(`products?search=${search}`)
+    }
+  }
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(event.target.value) setSearch(event.target.value.toString());
   }
 
   return (
@@ -47,7 +55,8 @@ const Header: React.FC = () => {
           </Link>            
         </LogoSection>
         <SearchSection>
-          <FormInput placeholder="Search" name="search" icon={<AiOutlineSearch />}/>
+          <FormInput placeholder="Search" name="search" icon={<AiOutlineSearch />} 
+            onKeyPress={handleSearch} onChange={handleSearchChange}/>
         </SearchSection>
         <CartSection hasItem={itemCount > 0 ? true: false}>
           <FaShoppingCart />

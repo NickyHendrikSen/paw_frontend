@@ -24,7 +24,7 @@ export default function ProductsPage() {
     const search = paramSearch ? paramSearch.toString() : "";
     
     setParams({categories: categories, search: search})
-  }, [isReady])
+  }, [query])
   
   if(!params) return null;
   

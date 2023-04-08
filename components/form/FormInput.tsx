@@ -20,7 +20,7 @@ type FormInputProps = {
 } & Record<string, any>
 
 const FormInput: React.FC<FormInputProps> = 
-  ({type = "text", name = "", placeholder, width="100%", marginTop = "0px", marginBottom = "0px", icon, register}) => 
+  ({type = "text", name = "", placeholder, width="100%", marginTop = "0px", marginBottom = "0px", icon, register, ...restProps}) => 
 {
   // const [val, setVal] = useState("");
 
@@ -35,7 +35,8 @@ const FormInput: React.FC<FormInputProps> =
       {icon && <IconWrapper>{icon}</IconWrapper>}
       {/* <TextField 
       {...restProps} placeholder={placeholder} type={type}  name={name}/> */}
-      <InputStyles placeholder={placeholder} type={type}  name={name} {...(register && {...register})}
+      <InputStyles placeholder={placeholder} type={type}  name={name} 
+        {...(register && {...register})} {...restProps}
       // onChange={changeHandler} value={val}
       />
     </InputContainer>
