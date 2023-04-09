@@ -1,51 +1,52 @@
 import styled from "styled-components"
 
-export const ProductList = styled.div`
-  margin-top: 50px;
-//   background: red;
+export const LineDivider = styled.hr`
+  margin: 58px 0px;
+  border: .5px solid var(--color-light-gray);
 `
 
-export const TitleText = styled.div`
-  color: black;
-  font-size: 25px;
-  font-weight: bold;
+export const CheckoutSection = styled.div`
+
 `
 
-export const SearchText = styled.div`
-  font-size: 20px;
-  margin-top: 20px;
-`
-
-export const ProductBar = styled.div`
+export const TotalPriceText = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-light-gray);
-  height: 40px;
-  padding: 6px;
-  width: 100%;
-`
-
-export const GridOption = styled.div`
-  font-weight: bold;
-  span {
-    margin-right: 10px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  .text {
+    font-size: 22px;
+  }
+  .total {
+    font-size: 28px;
+    font-weight: bold;
   }
 `
 
-export const GridOptionItem = styled.div<{isChosen: boolean}>`
-  display: inline-block;
-  svg {
-    ${props => props.isChosen ? `color: black;` : `color: var(--color-gray);`}
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-left: 10px;
-    cursor: pointer;
-    transition-duration: 0.2s;
+export const CheckoutButton = styled.button`
+  background-color: var(--color-blue);
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  font-family: var(--font-helvetica);
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 0.2s;
 
-    &:hover {
-      transform: scale(1.1);
+  svg {
+    margin-right: 15px;
+    transition-duration: 0.2s;
+  }
+
+  &:hover {
+    background-color: var(--color-light-blue);
+    svg {
+      transform: scale(1.3);
     }
   }
 `

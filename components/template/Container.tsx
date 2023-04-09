@@ -8,13 +8,14 @@ import {
 
 interface ContainerProps {
   children?: any,
-  paddingTop?: string 
+  paddingTop?: string,
+  paddingBottom?: string
 }
 
-const Container: React.FC<ContainerProps> = ({children, paddingTop = "0px"}) => {
+const Container: React.FC<ContainerProps> = ({children, paddingTop = "0px", paddingBottom = "0px"}) => {
     
   return (
-    <ContainerStyles paddingTop={paddingTop}>
+    <ContainerStyles paddingTop={paddingTop} paddingBottom={paddingBottom}>
       {children}
     </ContainerStyles>
   )

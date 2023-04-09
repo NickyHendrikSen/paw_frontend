@@ -5,12 +5,6 @@ export const ProductList = styled.div`
 //   background: red;
 `
 
-export const TitleText = styled.div`
-  color: black;
-  font-size: 25px;
-  font-weight: bold;
-`
-
 export const SearchText = styled.div`
   font-size: 20px;
   margin-top: 20px;

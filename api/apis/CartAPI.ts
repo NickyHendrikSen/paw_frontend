@@ -10,8 +10,21 @@ export const CartAPI = {
         productId: params.productId,
         quantity: params.quantity,
       })
-    
-      console.log(response);
+
     return response;
   },
+
+  getCart: async() => {
+    const response = await axiosClient.get('/cart')
+    
+    return response;
+  },
+
+  deleteCart: async(params: {
+    productId: string
+  }) => {
+    const response = await axiosClient.delete(`/cart/${params.productId}`)
+    
+    return response;
+  }
 }
