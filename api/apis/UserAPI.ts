@@ -27,4 +27,9 @@ export const UserAPI = {
         })
       return response;
     },
+    me: async() => {
+      const response = await axiosClient.get('/me')
+      
+      return response;
+    },
 }

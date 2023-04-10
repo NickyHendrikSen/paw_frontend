@@ -26,9 +26,9 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/store/AuthContext";
 
 const Header: React.FC = () => {
-  const itemCount = 50;
   const router = useRouter()
   const authContext = useContext(AuthContext)
+  const itemCount = authContext?.user?.cart?.items.length || 0;
 
   const [search, setSearch] = useState<string>("");
 

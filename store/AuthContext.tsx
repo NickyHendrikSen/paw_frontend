@@ -1,19 +1,24 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { getCookie, removeCookies, setCookies } from 'cookies-next';
 import { APISettings } from "../api/base";
+import { UserAPI } from "@/api/apis/UserAPI";
+import { useAsync } from "@/utils/useAsync";
 
 const TOKEN_NAME = "token"
 
 export const AuthContext = createContext<null | {
     login: (token: string | null) => unknown,
     logout: () => unknown,
-    isAuthenticated: () => unknown
+    isAuthenticated: () => unknown,
+    user: any
 }>(null)
 
 export const AuthContextProvider = (props: { children: ReactNode }) => {
     
     const [ token, setToken ] = useState<string | null>(null)
+    const [ user, setUser ] = useState<any>()
     const [ loaded, setLoaded ] = useState(false);
+    const { execute, value } = useAsync(UserAPI.me)
     
     const handleLogout = () => {
         setToken(null)
@@ -22,9 +27,15 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
     }
 
     useEffect(() => {
+        if(value){
+            setUser(value?.data.user);
+        }
+    }, [value])
+
+    useEffect(() => {
         if (token) {
-            console.log(token);
             APISettings.setAPIToken(handleLogout)
+            execute({});
             setLoaded(true)
         }
     }, [token])
@@ -58,7 +69,8 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
                 logout: handleLogout,
                 isAuthenticated: () => {
                     return !!token;
-                }
+                },
+                user
             }}
         >
             {props.children}
