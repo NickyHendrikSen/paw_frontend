@@ -12,18 +12,32 @@ export const SearchText = styled.div`
 
 export const ProductBar = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: var(--color-light-gray);
-  height: 40px;
-  padding: 6px;
+  background-color: var(--color-very-light-gray);
+  height: 50px;
+  padding: 20px;
   width: 100%;
 `
 
+export const SortOption = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  width: 30%;
+  span {
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+`
+
 export const GridOption = styled.div`
+  display: flex;
+  align-items: center;
   font-weight: bold;
   span {
     margin-right: 10px;
+    flex-shrink: 0;
   }
 `
 

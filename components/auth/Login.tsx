@@ -57,6 +57,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if(status === "success") {
+      console.log(value?.data?.token);
       authContext?.login(value?.data?.token || null)
       toast.success("Successfully Logged In!")
       router.push("/login")

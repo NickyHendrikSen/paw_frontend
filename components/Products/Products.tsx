@@ -11,10 +11,12 @@ import {
   ProductList,
   SearchText,
   ProductBar,
+  SortOption,
   GridOption,
   GridOptionItem
 } from "./Styles"
 import { TitleText } from '@/styles/Typography';
+import { Select } from '../Form/SelectStyles';
 
 type ProductsProps = {
   params: {
@@ -26,6 +28,8 @@ type ProductsProps = {
 const Products: React.FC<ProductsProps> = ({params}) => {
     const { execute, error, status, value: products } = useAsync(ProductAPI.getProducts)
     const [ gridOption, setGridOption ] = useState<"grid" | "list">("grid")
+    const [ sort, setSort ] = 
+      useState<"date_desc" | "date_asc" | "name_asc" | "name_desc" | "price_asc" | "price_desc">("date_asc")
     const router = useRouter()
 
     const handleGridChange = (grid: string) => {
@@ -34,20 +38,38 @@ const Products: React.FC<ProductsProps> = ({params}) => {
       }
     } 
 
+    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const val = e.target.value.toString();
+      if(val == "date_desc" || val == "date_asc" || val == "name_asc" || val == "name_desc" || val == "price_asc" || val == "price_desc") {
+        setSort(val); 
+      }
+    }
+
     useEffect(() => {
       if(status === "success") {
       }
     }, [status])
 
     useEffect(() => {
-        execute(params)
-    }, [params]);
+        execute({...params, sort: sort})
+    }, [params, sort]);
 
   return (
     <Container paddingTop='50px'>
       <TitleText>Products</TitleText>
       {params.search && <SearchText>Showing search result(s) for "{params.search}"</SearchText>}
       <ProductBar>
+        <SortOption>
+          <span>Sort by</span>
+          <Select onChange={handleSortChange}>
+            <option value="date_desc">Most Recent</option>
+            <option value="date_asc">Most Recent</option>
+            <option value="name_asc">A-Z</option>
+            <option value="name_desc">Z-A</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+          </Select>
+        </SortOption>
         <GridOption>
           <span>View as</span>
           <GridOptionItem isChosen={gridOption === "grid"} onClick={() => handleGridChange("grid")}>

@@ -1,10 +1,12 @@
 import axios, { AxiosError } from "axios";
+import { getCookie } from "cookies-next";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 // import { AuthContext } from "../store/AuthContext";
 // import getInvoiceValue from "../utils/getInvoiceValue";
 
 // const authContext = useContext(AuthContext)
+const TOKEN_NAME = "token"
 const apiURL = 'http://localhost:8000';
 
 export const axiosClient = axios.create({
@@ -16,10 +18,15 @@ export const axiosClient = axios.create({
 //     return req;
 // })
 
+var interceptor: any = null;
+
 export const APISettings = {
-    setAPIToken: (token: string, handleTokenExpired: () => unknown) => {
-        axiosClient.interceptors.request.use((req) => {
-            req.headers["Authorization"] = 'Bearer ' + token
+    setAPIToken: (handleTokenExpired: () => unknown) => {
+        if(interceptor) {
+            axiosClient.interceptors.request.eject(interceptor);
+        }
+        interceptor = axiosClient.interceptors.request.use((req) => {
+            req.headers["Authorization"] = 'Bearer ' + getCookie(TOKEN_NAME)?.toString()
             return req;
         })
 
@@ -28,7 +35,7 @@ export const APISettings = {
         }, (error) => {
             console.log("react to error", error)
             if ( error instanceof AxiosError ) {
-                if ( error && error.response?.data === "Invalid Token" ) {
+                if ( error && error.response?.data.message === "jwt expired" ) {
                     handleTokenExpired()
                 }
                 // if(error.response?.data) {

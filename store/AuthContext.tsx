@@ -18,11 +18,13 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
     const handleLogout = () => {
         setToken(null)
         removeCookies(TOKEN_NAME)
+        // setLoaded(false);
     }
 
     useEffect(() => {
         if (token) {
-            APISettings.setAPIToken(token, handleLogout)
+            console.log(token);
+            APISettings.setAPIToken(handleLogout)
             setLoaded(true)
         }
     }, [token])
@@ -51,7 +53,7 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
                     if(!token) return;
                     
                     setToken(token)
-                    setCookies(TOKEN_NAME, token)
+                    setCookies(TOKEN_NAME, token, { maxAge: 60 * 30 })
                 },
                 logout: handleLogout,
                 isAuthenticated: () => {

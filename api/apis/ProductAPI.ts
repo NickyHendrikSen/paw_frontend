@@ -5,11 +5,13 @@ export const ProductAPI = {
     
     getProducts: async(params: {
       categories?: string,
-      search?: string
+      search?: string,
+      sort: string,
     }) => {
       const response = await axiosClient.get('/products', {params: {
         ...(params.categories && {categories: params.categories}),
         ...(params.search && {search: params.search}),
+        ...(params.sort && {sort: params.sort}),
       }})
       return response;
     },
