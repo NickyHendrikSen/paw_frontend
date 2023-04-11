@@ -7,6 +7,7 @@ import { TitleText } from '@/styles/Typography';
 import CartDisplay from './CartDisplay';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AuthContext } from '@/store/AuthContext';
+import EmptyCart from './EmptyCart';
 
 import {
   LineDivider,
@@ -53,6 +54,10 @@ const Cart: React.FC = () => {
   useEffect(() => {
     execute({});
   }, []);
+
+  if(cart && cart?.length == 0) {
+    return (<EmptyCart />);
+  }
 
   return (
     <Container paddingTop='50px' paddingBottom='50px'>
