@@ -15,6 +15,7 @@ import {
   TotalPriceText,
   CheckoutButton
 } from "./Styles"
+import Loading from '../Loading/Loading';
 
 type CartState = {
   _product: {
@@ -55,14 +56,15 @@ const Cart: React.FC = () => {
     execute({});
   }, []);
 
-  if(cart && cart?.length == 0) {
+  if(cart && cart?.length == 0 && status === "success") {
     return (<EmptyCart />);
   }
 
   return (
     <Container paddingTop='50px' paddingBottom='50px'>
       <TitleText>Cart</TitleText>
-      {cart?.map((c) => (<CartDisplay {...c} refreshCart={refreshCart}></CartDisplay>))}
+      {status === "pending" ? <Loading /> : cart?.map((c) => (<CartDisplay {...c} refreshCart={refreshCart}></CartDisplay>))}
+      
       <LineDivider />
       <CheckoutSection>
         <TotalPriceText>
@@ -70,7 +72,7 @@ const Cart: React.FC = () => {
           <div className='total'>
             ${cart?.reduce((accumulator, { _product, quantity }) => {
               return accumulator + (_product.price * quantity)
-            }, 0)}
+            }, 0).toFixed(2)}
           </div>
         </TotalPriceText>
         <CheckoutButton><FaShoppingCart /> Checkout</CheckoutButton>

@@ -17,6 +17,7 @@ import {
 } from "./Styles"
 import { TitleText } from '@/styles/Typography';
 import { Select } from '../Form/SelectStyles';
+import Loading from '../Loading/Loading';
 
 type ProductsProps = {
   params: {
@@ -62,8 +63,8 @@ const Products: React.FC<ProductsProps> = ({params}) => {
         <SortOption>
           <span>Sort by</span>
           <Select onChange={handleSortChange}>
-            <option value="date_desc">Most Recent</option>
-            <option value="date_asc">Oldest</option>
+            {/* <option value="date_desc">Most Recent</option>
+            <option value="date_asc">Oldest</option> */}
             <option value="name_asc">A-Z</option>
             <option value="name_desc">Z-A</option>
             <option value="price_asc">Price: Low to High</option>
@@ -80,7 +81,7 @@ const Products: React.FC<ProductsProps> = ({params}) => {
           </GridOptionItem>
         </GridOption>
       </ProductBar>
-      {status === "pending" ? "Loading.." : (
+      {status === "pending" ? <Loading height={"200px"}/> : (
         <ProductList>
           {
           products?.data?.map((v: any) => 
