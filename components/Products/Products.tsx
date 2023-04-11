@@ -29,7 +29,7 @@ const Products: React.FC<ProductsProps> = ({params}) => {
     const { execute, error, status, value: products } = useAsync(ProductAPI.getProducts)
     const [ gridOption, setGridOption ] = useState<"grid" | "list">("grid")
     const [ sort, setSort ] = 
-      useState<"date_desc" | "date_asc" | "name_asc" | "name_desc" | "price_asc" | "price_desc">("date_asc")
+      useState<"date_desc" | "date_asc" | "name_asc" | "name_desc" | "price_asc" | "price_desc">("name_asc")
     const router = useRouter()
 
     const handleGridChange = (grid: string) => {
@@ -63,7 +63,7 @@ const Products: React.FC<ProductsProps> = ({params}) => {
           <span>Sort by</span>
           <Select onChange={handleSortChange}>
             <option value="date_desc">Most Recent</option>
-            <option value="date_asc">Most Recent</option>
+            <option value="date_asc">Oldest</option>
             <option value="name_asc">A-Z</option>
             <option value="name_desc">Z-A</option>
             <option value="price_asc">Price: Low to High</option>
