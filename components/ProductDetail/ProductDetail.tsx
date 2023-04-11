@@ -104,6 +104,7 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
   useEffect(() => {
     if(statusCart === "success") {
       toast.success("Product added to cart!");
+      authContext?.refreshProfile();
       router.push("/products");
     }
     if(statusCart === "error") {

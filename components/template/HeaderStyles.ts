@@ -183,3 +183,51 @@ export const Dropdown = styled.div`
     }
   }
 `
+
+export const DropdownProfile = styled.div`
+  display: none;
+  position: absolute;
+  padding-top: 26px;
+  top: 100%;
+  color: white; 
+  right: -16px;
+  width: calc(100% + 16px);
+`
+
+export const DropdownProfileItem = styled.div`
+  padding: 15px 10px;
+  transition-duration: 0.2s;
+  background: var(--color-blue);
+  &:hover {
+    background: var(--color-light-blue);
+  }
+`
+
+export const ProfileHeader = styled.div`
+  position: relative;
+  width: 100px;
+  margin-right: 15px;
+  text-align: center;
+  cursor: pointer;
+  span {
+    color: white;
+    width: 100%;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  svg {
+    vertical-align: middle;
+    position: absolute;
+    right: -16px;
+    width: 16px;
+    height: 16px;
+    top: calc(50% - 6px);
+    color: white;
+  }
+  &:hover {
+    ${DropdownProfile} {
+      display: block;
+    }
+  }
+`

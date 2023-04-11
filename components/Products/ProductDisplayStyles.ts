@@ -114,8 +114,8 @@ export const Wrapper = styled.div<{isSoldOut: boolean, gridOption: "grid" | "lis
   }
   ${DescriptionSection} {
     display: block;
-    overflow: hidden; /* Hide any overflow content */
-    white-space: nowrap; /* Prevent line breaks within the div */
+    overflow: hidden; 
+    white-space: nowrap;
     text-overflow: ellipsis;
     margin-top: 5px;
   }

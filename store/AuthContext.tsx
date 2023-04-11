@@ -6,17 +6,29 @@ import { useAsync } from "@/utils/useAsync";
 
 const TOKEN_NAME = "token"
 
+type UserState = {
+    name: string,
+    email: string,
+    _id: string,
+    cart: {
+        items: [{
+            quantity: number
+        }]
+    }
+}
+
 export const AuthContext = createContext<null | {
     login: (token: string | null) => unknown,
     logout: () => unknown,
     isAuthenticated: () => unknown,
+    refreshProfile: () => unknown,
     user: any
 }>(null)
 
 export const AuthContextProvider = (props: { children: ReactNode }) => {
     
     const [ token, setToken ] = useState<string | null>(null)
-    const [ user, setUser ] = useState<any>()
+    const [ user, setUser ] = useState<UserState>()
     const [ loaded, setLoaded ] = useState(false);
     const { execute, value } = useAsync(UserAPI.me)
     
@@ -25,17 +37,22 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
         removeCookies(TOKEN_NAME)
         // setLoaded(false);
     }
+    
+    const refreshProfile = () => {
+        execute({});
+    }
 
     useEffect(() => {
         if(value){
             setUser(value?.data.user);
+            console.log(value?.data.user);
         }
     }, [value])
 
     useEffect(() => {
         if (token) {
             APISettings.setAPIToken(handleLogout)
-            execute({});
+            refreshProfile();
             setLoaded(true)
         }
     }, [token])
@@ -70,6 +87,7 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
                 isAuthenticated: () => {
                     return !!token;
                 },
+                refreshProfile: refreshProfile,
                 user
             }}
         >

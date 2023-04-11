@@ -1,6 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import FormInput from "../Form/FormInput";
+import { AiOutlineSearch } from "react-icons/ai";
+import { FaShoppingCart } from "react-icons/fa";
+import Button from "../Button/Button";
+import Container from "./Container";
+import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "@/store/AuthContext";
+import { RxTriangleDown } from "react-icons/rx";
 
 import {
   HeaderContainer,
@@ -13,17 +21,13 @@ import {
   BottomContainer,
   LinkWrapper,
   Dropdown,
-  DropdownItem
+  DropdownItem,
+  ProfileHeader,
+  DropdownProfile,
+  DropdownProfileItem
 } from "./HeaderStyles"
   
 import pawLogo from "../../public/images/paw-logo.png"
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
-import Button from "../Button/Button";
-import Container from "./Container";
-import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "@/store/AuthContext";
 
 const Header: React.FC = () => {
   const router = useRouter()
@@ -68,8 +72,16 @@ const Header: React.FC = () => {
         </CartSection>
         <LineDivider />
         {authContext?.isAuthenticated() ?
-          <Button onClick={handleLogout}
-            fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%">Logout</Button>
+          <ProfileHeader>
+            <span className="name">{authContext?.user?.name}</span>
+            <RxTriangleDown />
+            <DropdownProfile>
+              <DropdownProfileItem>Profile</DropdownProfileItem>
+              <DropdownProfileItem onClick={handleLogout}>Logout</DropdownProfileItem>
+            </DropdownProfile>
+          </ProfileHeader>
+          // <Button onClick={handleLogout}
+          //   fill={false} fontSize={15} paddingHorizontal="15px" paddingVertical="8px" marginLeft="1%">Logout</Button>
            :
           <>
             <Button href="/login"

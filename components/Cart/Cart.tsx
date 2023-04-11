@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useAsync } from "@/utils/useAsync";
 import Container from "../Template/Container";
 import { CartAPI } from '@/api/apis/CartAPI';
 import { useRouter } from "next/router";
 import { TitleText } from '@/styles/Typography';
+import CartDisplay from './CartDisplay';
+import { FaShoppingCart } from 'react-icons/fa';
+import { AuthContext } from '@/store/AuthContext';
 
 import {
   LineDivider,
@@ -11,8 +14,6 @@ import {
   TotalPriceText,
   CheckoutButton
 } from "./Styles"
-import CartDisplay from './CartDisplay';
-import { FaShoppingCart } from 'react-icons/fa';
 
 type CartState = {
   _product: {
@@ -32,9 +33,11 @@ const Cart: React.FC = () => {
   const { execute, error, status, value } = useAsync(CartAPI.getCart)
   const [ cart, setCart ] = useState<Array<CartState>>()
   const router = useRouter()
+  const authContext = useContext(AuthContext);
 
   const refreshCart = () => {
     execute({});
+    authContext?.refreshProfile();
   }
 
   useEffect(() => {

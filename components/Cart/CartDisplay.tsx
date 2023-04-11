@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useAsync } from "@/utils/useAsync";
-import Container from "../Template/Container";
 import { CartAPI } from '@/api/apis/CartAPI';
 import { useRouter } from "next/router";
 import Image from 'next/image';
