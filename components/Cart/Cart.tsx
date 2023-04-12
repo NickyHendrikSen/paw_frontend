@@ -8,6 +8,9 @@ import CartDisplay from './CartDisplay';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AuthContext } from '@/store/AuthContext';
 import EmptyCart from './EmptyCart';
+import Checkout from "../Checkout/Checkout"
+import Loading from '../Loading/Loading';
+import { Modal } from '@mui/material';
 
 import {
   LineDivider,
@@ -15,7 +18,6 @@ import {
   TotalPriceText,
   CheckoutButton
 } from "./Styles"
-import Loading from '../Loading/Loading';
 
 type CartState = {
   _product: {
@@ -34,12 +36,21 @@ type CartState = {
 const Cart: React.FC = () => {
   const { execute, error, status, value } = useAsync(CartAPI.getCart)
   const [ cart, setCart ] = useState<Array<CartState>>()
+  const [ checkoutModal, setCheckoutModal ] = useState(false);
   const router = useRouter()
   const authContext = useContext(AuthContext);
 
   const refreshCart = () => {
     execute({});
     authContext?.refreshProfile();
+  }
+
+  const onCloseModal = () => {
+    setCheckoutModal(false);
+  }
+
+  const onCheckout = () => {
+    setCheckoutModal(true);
   }
 
   useEffect(() => {
@@ -62,6 +73,9 @@ const Cart: React.FC = () => {
 
   return (
     <Container paddingTop='50px' paddingBottom='50px'>
+      <Modal open={checkoutModal} onClose={onCloseModal}>
+        <Checkout onClose={onCloseModal} />
+      </Modal>
       <TitleText>Cart</TitleText>
       {status === "pending" ? <Loading /> : cart?.map((c) => (<CartDisplay {...c} refreshCart={refreshCart}></CartDisplay>))}
       
@@ -75,7 +89,7 @@ const Cart: React.FC = () => {
             }, 0).toFixed(2)}
           </div>
         </TotalPriceText>
-        <CheckoutButton><FaShoppingCart /> Checkout</CheckoutButton>
+        <CheckoutButton onClick={onCheckout}><FaShoppingCart /> Checkout</CheckoutButton>
       </CheckoutSection>
     </Container>
   )

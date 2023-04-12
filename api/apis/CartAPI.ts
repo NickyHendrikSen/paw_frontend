@@ -26,5 +26,11 @@ export const CartAPI = {
     const response = await axiosClient.delete(`/cart/${params.productId}`)
     
     return response;
+  },
+
+  checkout: async() => {
+    const response = await axiosClient.get(`/checkout`)
+    
+    return response;
   }
 }
