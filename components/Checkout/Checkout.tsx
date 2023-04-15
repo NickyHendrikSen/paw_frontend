@@ -30,12 +30,12 @@ type CheckoutState = {
 const Checkout: React.FC<CheckoutProps> = ({ onClose }) => {
 
   const { execute, value, status } = useAsync(CartAPI.checkout);
-  const [ checkoutData, setCheckoutData ] = useState<CheckoutState | undefined>();
+  // const [ checkoutData, setCheckoutData ] = useState<CheckoutState | undefined>();
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ""
   );
   
-  const handleCheckout = async () => {
+  const stripeCheckout = async (checkoutData: CheckoutState) => {
     try {
       const stripe = await stripePromise;
 
@@ -60,13 +60,13 @@ const Checkout: React.FC<CheckoutProps> = ({ onClose }) => {
     onClose();
   }
 
-  useEffect(() => {
+  const handleCheckout = () => {
     execute({});
-  }, []);
+  };
 
   useEffect(() => {
     if(status === "success") {
-      setCheckoutData(value?.data?.data)
+      stripeCheckout(value?.data?.data)
     }
   }, [status])
 
