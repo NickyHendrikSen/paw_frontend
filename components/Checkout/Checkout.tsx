@@ -5,14 +5,19 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import {
   Wrapper,
+  LoadingWrapper,
   CheckoutTitle,
   CheckoutText,
   CheckoutButtonYes,
   CheckoutButtonNo
 } from "./CheckoutStyles"
+import { toast } from "react-toastify";
+import Loading from "../Loading/Loading";
 
 type CheckoutProps = {
-  onClose: () => unknown
+  onClose: () => unknown,
+  setLoading: (v: boolean) => unknown,
+  isLoading: boolean
 }
 
 type CheckoutState = {
@@ -27,9 +32,9 @@ type CheckoutState = {
   totalSum: Number
 }
 
-const Checkout: React.FC<CheckoutProps> = ({ onClose }) => {
+const Checkout: React.FC<CheckoutProps> = ({ onClose, setLoading, isLoading }) => {
 
-  const { execute, value, status } = useAsync(CartAPI.checkout);
+  const { execute, value, status, error } = useAsync(CartAPI.checkout);
   // const [ checkoutData, setCheckoutData ] = useState<CheckoutState | undefined>();
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ""
@@ -61,6 +66,7 @@ const Checkout: React.FC<CheckoutProps> = ({ onClose }) => {
   }
 
   const handleCheckout = () => {
+    setLoading(true);
     execute({});
   };
 
@@ -68,14 +74,24 @@ const Checkout: React.FC<CheckoutProps> = ({ onClose }) => {
     if(status === "success") {
       stripeCheckout(value?.data?.data)
     }
+    if(status === "error") {
+      toast.error(error?.message);
+      setLoading(false);
+    }
   }, [status])
 
   return (
     <Wrapper>
+      {isLoading && 
+      (
+        <LoadingWrapper>
+          <Loading />
+        </LoadingWrapper>
+      )}
       <CheckoutTitle>Checkout</CheckoutTitle>
       <CheckoutText>Are you sure that you want to checkout?</CheckoutText>
-      <CheckoutButtonYes onClick={handleCheckout}>Yes</CheckoutButtonYes>
-      <CheckoutButtonNo onClick={handleClose}>No</CheckoutButtonNo>
+      <CheckoutButtonYes onClick={handleCheckout} disabled={isLoading}>Yes</CheckoutButtonYes>
+      <CheckoutButtonNo onClick={handleClose} disabled={isLoading}>No</CheckoutButtonNo>
     </Wrapper>
   )
 }

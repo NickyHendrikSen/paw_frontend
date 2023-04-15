@@ -37,6 +37,7 @@ const Cart: React.FC = () => {
   const { execute, error, status, value } = useAsync(CartAPI.getCart)
   const [ cart, setCart ] = useState<Array<CartState>>()
   const [ checkoutModal, setCheckoutModal ] = useState(false);
+  const [ isLoading, setLoading ] = useState<boolean>(false);
   const router = useRouter()
   const authContext = useContext(AuthContext);
 
@@ -46,6 +47,7 @@ const Cart: React.FC = () => {
   }
 
   const onCloseModal = () => {
+    if(isLoading) return;
     setCheckoutModal(false);
   }
 
@@ -56,10 +58,9 @@ const Cart: React.FC = () => {
   useEffect(() => {
     if(status === "success") {
       setCart(value?.data?.cart)
-      console.log(value?.data?.cart)
     }
     if(status === "error") {
-      console.log(error);
+      console.log(error?.message);
     }
   }, [status])
 
@@ -73,8 +74,8 @@ const Cart: React.FC = () => {
 
   return (
     <Container paddingTop='50px' paddingBottom='50px'>
-      <Modal open={checkoutModal} onClose={onCloseModal}>
-        <Checkout onClose={onCloseModal} />
+      <Modal open={checkoutModal} onClose={onCloseModal} >
+        <Checkout onClose={onCloseModal} setLoading={setLoading} isLoading={isLoading}/>
       </Modal>
       <TitleText>Cart</TitleText>
       {status === "pending" ? <Loading /> : cart?.map((c) => (<CartDisplay {...c} refreshCart={refreshCart}></CartDisplay>))}
@@ -89,7 +90,7 @@ const Cart: React.FC = () => {
             }, 0).toFixed(2)}
           </div>
         </TotalPriceText>
-        <CheckoutButton onClick={onCheckout}><FaShoppingCart /> Checkout</CheckoutButton>
+        <CheckoutButton onClick={onCheckout} disabled={isLoading}><FaShoppingCart /> Checkout</CheckoutButton>
       </CheckoutSection>
     </Container>
   )
