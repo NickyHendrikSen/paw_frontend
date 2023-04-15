@@ -76,7 +76,11 @@ const Header: React.FC = () => {
             <span className="name">{authContext?.user?.name}</span>
             <RxTriangleDown />
             <DropdownProfile>
-              <DropdownProfileItem>Profile</DropdownProfileItem>
+              <DropdownProfileItem>
+                <Link href="/history">
+                  History
+                </Link>
+              </DropdownProfileItem>
               <DropdownProfileItem onClick={handleLogout}>Logout</DropdownProfileItem>
             </DropdownProfile>
           </ProfileHeader>

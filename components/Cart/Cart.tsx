@@ -15,6 +15,8 @@ import { Modal } from '@mui/material';
 import {
   LineDivider,
   CheckoutSection,
+  SubtotalPriceText,
+  ShippingPriceText,
   TotalPriceText,
   CheckoutButton
 } from "./Styles"
@@ -37,6 +39,7 @@ const Cart: React.FC = () => {
   const { execute, error, status, value } = useAsync(CartAPI.getCart)
   const [ cart, setCart ] = useState<Array<CartState>>()
   const [ checkoutModal, setCheckoutModal ] = useState(false);
+  const [ subTotal, setSubtotal ] = useState<number>(0);
   const [ isLoading, setLoading ] = useState<boolean>(false);
   const router = useRouter()
   const authContext = useContext(AuthContext);
@@ -65,8 +68,18 @@ const Cart: React.FC = () => {
   }, [status])
 
   useEffect(() => {
+    setSubtotal(cart?.reduce((accumulator, { _product, quantity }) => {
+      return accumulator + (_product.price * quantity)
+    }, 0) ?? 0)
+  }, [cart])
+
+  useEffect(() => {
     execute({});
   }, []);
+
+  if(status === "pending") {
+    return (<Loading />);
+  }
 
   if(cart && cart?.length == 0 && status === "success") {
     return (<EmptyCart />);
@@ -78,16 +91,26 @@ const Cart: React.FC = () => {
         <Checkout onClose={onCloseModal} setLoading={setLoading} isLoading={isLoading}/>
       </Modal>
       <TitleText>Cart</TitleText>
-      {status === "pending" ? <Loading /> : cart?.map((c) => (<CartDisplay {...c} refreshCart={refreshCart}></CartDisplay>))}
+      {cart?.map((c) => (<CartDisplay {...c} refreshCart={refreshCart}></CartDisplay>))}
       
       <LineDivider />
       <CheckoutSection>
+        <SubtotalPriceText>
+          <div className='text'>Subtotal</div>
+          <div className='total'>
+            ${subTotal.toFixed(2)}
+          </div>
+        </SubtotalPriceText>
+        <ShippingPriceText>
+          <div className='text'>Shipping</div>
+          <div className='total'>
+            $5.00
+          </div>
+        </ShippingPriceText>
         <TotalPriceText>
           <div className='text'>Total</div>
           <div className='total'>
-            ${cart?.reduce((accumulator, { _product, quantity }) => {
-              return accumulator + (_product.price * quantity)
-            }, 0).toFixed(2)}
+            ${(subTotal + 5).toFixed(2)}
           </div>
         </TotalPriceText>
         <CheckoutButton onClick={onCheckout} disabled={isLoading}><FaShoppingCart /> Checkout</CheckoutButton>

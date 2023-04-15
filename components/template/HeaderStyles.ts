@@ -198,6 +198,10 @@ export const DropdownProfileItem = styled.div`
   padding: 15px 10px;
   transition-duration: 0.2s;
   background: var(--color-blue);
+  a {
+    color: white;
+    text-decoration: none;
+  }
   &:hover {
     background: var(--color-light-blue);
   }

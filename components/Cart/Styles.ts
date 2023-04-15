@@ -9,12 +9,39 @@ export const CheckoutSection = styled.div`
 
 `
 
+export const SubtotalPriceText = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  .text {
+    font-size: 20px;
+  }
+  .total {
+    font-size: 20px;
+    font-weight: bold;
+  }
+`
+
+export const ShippingPriceText = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 58px;
+  .text {
+    font-size: 18px;
+  }
+  .total {
+    font-size: 18px;
+    font-weight: bold;
+  }
+`
+
 export const TotalPriceText = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+  font-weight: bold;
   .text {
-    font-size: 22px;
+    font-size: 28px;
   }
   .total {
     font-size: 28px;
