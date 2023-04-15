@@ -88,7 +88,7 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
                     if(!token) return;
                     
                     setToken(token)
-                    setCookies(TOKEN_NAME, token, { maxAge: 60 * 30 })
+                    setCookies(TOKEN_NAME, token)
                 },
                 logout: handleLogout,
                 isAuthenticated: () => {
