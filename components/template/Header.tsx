@@ -125,6 +125,12 @@ const Header: React.FC = () => {
             <Link href="/about-us">
               About Us
             </Link>
+            {authContext?.isAuthenticated() && authContext?.isAdmin() ? 
+            (
+              <Link href="/admin/add-product">
+                Add Product
+              </Link>
+            ) : ''}
           </LinkWrapper>
         </Container>
       </BottomContainer>

@@ -36,24 +36,24 @@ const Checkout: React.FC<CheckoutProps> = ({ onClose }) => {
   );
   
   const handleCheckout = async () => {
-    try {
-      const stripe = await stripePromise;
+    try {
+      const stripe = await stripePromise;
 
       if(!stripe) {
         return;
       }
       
-      const result = await stripe.redirectToCheckout({
-        sessionId: checkoutData?.sessionId ?? "",
-      });
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutData?.sessionId ?? "",
+      });
 
-      if (result.error) {
-        alert(result.error.message);
-      }
+      if (result.error) {
+        alert(result.error.message);
+      }
       console.log(result)
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClose = () => {

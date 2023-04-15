@@ -10,6 +10,7 @@ type UserState = {
     name: string,
     email: string,
     _id: string,
+    role: string,
     cart: {
         items: [{
             quantity: number
@@ -22,7 +23,8 @@ export const AuthContext = createContext<null | {
     logout: () => unknown,
     isAuthenticated: () => unknown,
     refreshProfile: () => unknown,
-    user: any
+    user: any,
+    isAdmin: () => boolean,
 }>(null)
 
 export const AuthContextProvider = (props: { children: ReactNode }) => {
@@ -42,10 +44,15 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
         execute({});
     }
 
+    const isAdmin = () => {
+        if(!user) return false;
+        console.log(user);
+        return user?.role === "admin";
+    }
+
     useEffect(() => {
         if(value){
             setUser(value?.data.user);
-            console.log(value?.data.user);
         }
     }, [value])
 
@@ -88,7 +95,8 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
                     return !!token;
                 },
                 refreshProfile: refreshProfile,
-                user
+                user: user,
+                isAdmin: isAdmin
             }}
         >
             {props.children}

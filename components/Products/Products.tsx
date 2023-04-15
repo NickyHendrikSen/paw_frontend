@@ -81,7 +81,7 @@ const Products: React.FC<ProductsProps> = ({params}) => {
           </GridOptionItem>
         </GridOption>
       </ProductBar>
-      {status === "pending" ? <Loading height={"200px"}/> : (
+      {status === "pending" ? <Loading minHeight={"200px"}/> : (
         <ProductList>
           {
           products?.data?.map((v: any) => 
