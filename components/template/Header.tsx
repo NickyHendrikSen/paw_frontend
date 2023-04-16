@@ -77,8 +77,8 @@ const Header: React.FC = () => {
             <RxTriangleDown />
             <DropdownProfile>
               <DropdownProfileItem>
-                <Link href="/history">
-                  History
+                <Link href="/order">
+                  Order History
                 </Link>
               </DropdownProfileItem>
               <DropdownProfileItem onClick={handleLogout}>Logout</DropdownProfileItem>
