@@ -8,4 +8,12 @@ export const OrderAPI = {
     return response;
   },
 
+  getOrder: async(params: {
+    orderId: string
+  }) => {
+    const response = await axiosClient.get(`/order/${params.orderId}`)
+    
+    return response;
+  }
+
 }

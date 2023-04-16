@@ -1,5 +1,6 @@
 import { AuthContextProvider } from '@/store/AuthContext';
 import '@/styles/globals.css'
+import '@/styles/fonts.css'
 import type { AppProps } from 'next/app'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

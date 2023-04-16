@@ -2,14 +2,14 @@ import Head from 'next/head'
 import Header from '@/components/Template/Header';
 import RouteGuard from '@/components/Guards/RouteGuard';
 import SEO from '@/components/SEO/SEO';
-import OrderHistory from '@/components/OrderHistory/OrderHistory';
+import OrderDetail from '@/components/OrderDetail/OrderDetail';
 
-export default function HistoryPage()  {
+export default function OrderDetailPage()  {
   return (
     <RouteGuard>
-      <SEO siteTitle="Order History" description="Order history page"/>
-      <Header />
-      <OrderHistory />
+      <SEO siteTitle="Invoice" description="Invoice page"/>
+      {/* <Header /> */}
+      <OrderDetail />
     </RouteGuard>
   )
 }
