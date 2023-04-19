@@ -7,13 +7,17 @@ import Loading from "../Loading/Loading";
 
 import {
   Wrapper,
+  PrintWrapper,
+  PrintButton,
   TitleText,
   OrderIdText,
   DateText,
   ShippingWrapper,
   ProductListWrapper,
   ProductsTitle,
-  ProductList
+  ProductList,
+  ProductListHead,
+  ProductListBody
 } from "./Styles"
 
 type ProductsType = {
@@ -32,7 +36,7 @@ type ProductsType = {
 
 export type OrderState = {
   _id: string,
-  products: ProductsType,
+  products: Array<ProductsType>,
   shipping: number,
   stripe_total: number,
   subtotal: number,
@@ -47,6 +51,10 @@ const OrderDetail: React.FC = () => {
   const router = useRouter();
   const { query, isReady } = router;
   const { orderId } = query;
+
+  const printInvoice = () => {
+    print();
+  }
 
   useEffect(() => {
     if(!isReady) return;
@@ -71,6 +79,9 @@ const OrderDetail: React.FC = () => {
 
   return (
     <Wrapper>
+      <PrintWrapper>
+        <PrintButton onClick={printInvoice}>Print</PrintButton>
+      </PrintWrapper>
       <TitleText>INVOICE</TitleText>
       <OrderIdText>#{order?._id}</OrderIdText>
       {/* <DateText>{format(new Date(order.checkout_session?.created*1000), 'MM-dd-yyyy')}</DateText> */}
@@ -82,9 +93,26 @@ const OrderDetail: React.FC = () => {
         <div className="text">{order?.checkout_session?.shipping?.address?.city}, {order?.checkout_session?.shipping?.address?.state} {order?.checkout_session?.shipping?.address?.postal_code}</div>
       </ShippingWrapper>
       <ProductListWrapper>
-        <ProductsTitle>Products</ProductsTitle>
+        {/* <ProductsTitle>Products</ProductsTitle> */}
         <ProductList>
-
+          <ProductListHead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </ProductListHead>
+          <ProductListBody>
+            {order?.products?.map((product) => (
+              <tr>
+                <td>{product._product.name}</td>
+                <td>{product.quantity}</td>
+                <td>${(product._product.price)?.toFixed(2)}</td>
+                <td>${(product.quantity * product.price).toFixed(2)}</td>
+              </tr>
+            ))}
+          </ProductListBody>
         </ProductList>
       </ProductListWrapper>
     </Wrapper>

@@ -12,13 +12,13 @@
 }
 @font-face {
   font-family: 'Open Sauce One';
-  src: url('/fonts/OpenSauceOne-Bold.ttf') format('truetype');
+  src: url('/fonts/OpenSauceOne-Black.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: 'Open Sauce One';
-  src: url('/fonts/OpenSauceOne-BoldItalic.ttf') format('truetype');
+  src: url('/fonts/OpenSauceOne-BlackItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
 }
