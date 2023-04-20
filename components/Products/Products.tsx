@@ -58,7 +58,7 @@ const Products: React.FC<ProductsProps> = ({params}) => {
   return (
     <Container paddingTop='50px'>
       <TitleText>Products</TitleText>
-      {params.search && <SearchText>Showing search result(s) for "{params.search}"</SearchText>}
+      {params.search && <SearchText>Showing search result(s) for &quot;{params.search}&quot;</SearchText>}
       <ProductBar>
         <SortOption>
           <span>Sort by</span>

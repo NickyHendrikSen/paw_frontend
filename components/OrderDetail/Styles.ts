@@ -11,8 +11,39 @@ export const PrintWrapper = styled.div`
   border-bottom-left-radius: 5px;
   padding: 0 10px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+`
+
+export const BackButton = styled.button`
+  padding: 7px 10px;
+  color: var(--color-blue);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  transition-duration: 0.2s;
+  border: 1px solid transparent;
+  background: transparent;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+
+  svg {
+    vertical-align: middle;
+    margin-bottom: 2px;
+    transition-duration: 0.2s;
+    width: 0%;
+    margin-right: 0px;
+  }
+
+  &:hover {
+    svg {
+      width: 20px;
+      margin-right: 3px;
+    }
+  }
 `
 
 export const PrintButton = styled.button`
@@ -34,12 +65,42 @@ export const PrintButton = styled.button`
   }
 `
 
+export const InvoiceHeader = styled.div`
+  height: 70px;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+`
+
+export const InvoiceInfo = styled.div`
+  height: 30px;
+  width: 450px;
+  padding-right: 80px;
+  position: relative;
+
+  &:after {
+    content: " ";
+    height: 30px;
+    width: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--color-blue);
+  }
+`
+
 export const TitleText = styled.div`
-  color: var(--color-dark);
+  color: white;
   font-size: 18px;
   font-weight: bold;
-  letter-spacing: 2px;
-  margin-top: 50px;
+  letter-spacing: 8px;
+  background: var(--color-blue);
+  width: 325px;
+  height: 100%;
+  padding-left: 80px;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
 `
 
 export const Wrapper = styled.div`
@@ -56,7 +117,7 @@ export const Wrapper = styled.div`
       display:none;
     }
 
-    ${TitleText} { 
+    ${InvoiceHeader} { 
       margin-top: 25px;
     }
   }
@@ -67,11 +128,43 @@ export const OrderIdText = styled.div`
   color: var(--color-blue);
 `
 
+export const InvoiceNo = styled.div`
+  font-weight: bold;
+  text-align: right;
+  font-size: 12px;
+  letter-spacing: 3px;
+`
+
 export const DateText = styled.div`
+  text-align: right;
+  font-size: 12px;
+  margin-top: 2px;
+  color: var(--color-gray);
+`
+
+export const TopContentWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  padding: 0px 80px;
+  margin-top: 50px;
+`
+
+export const BillWrapper = styled.div`
+  width: 300px;
+  .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .text {
+    margin-top: 5px;
+    font-size: 12px;
+    color: var(--color-gray);
+    font-weight: normal;
+  }
 `
 
 export const ShippingWrapper = styled.div`
-  margin-top: 30px;
   .title {
     font-weight: bold;
     margin-bottom: 10px;
@@ -106,18 +199,86 @@ export const ProductListHead = styled.thead`
   & > tr {
     & > th {
       padding: 10px;
-      border-top: 1px solid var(--color-gray);
-      border-bottom: 1px solid var(--color-gray);
+      border-top: 2px solid var(--color-blue);
+      color: var(--color-blue);
+      font-size: 15px;
+      padding-bottom: 20px;
+
+      &.left {
+        text-align: left;
+      }
+      &.right {
+        text-align: right;
+      }
+      &:last-child {
+        padding-right: 80px;
+      }
+      &:first-child {
+        padding-left: 80px;
+      }
     }
   }
 `
 
 export const ProductListBody = styled.tbody`
   & > tr {
+    &:last-child{
+      & > td {
+      border-bottom: none;
+      }
+    }
     & > td {
       text-align: center;
       padding: 10px;
       border-bottom: 1px solid var(--color-light-gray);
+      font-size: 13px;
+
+      &.left {
+        text-align: left;
+      }
+      &.right {
+        text-align: right;
+      }
+      &:last-child {
+        padding-right: 80px;
+      }
+      &:first-child {
+        padding-left: 80px;
+      }
     }
+  }
+`
+
+export const PriceSummaryWrapper = styled.div`
+  width: 100%;
+  margin-top: 20px;
+`
+
+export const PriceSummary = styled.div`
+  width: 100%;
+  padding: 0px 80px;
+  display: flex;
+  justify-content : flex-end;
+  font-size: 13px;
+  margin-top: 7px;
+
+  .text {
+    text-align: right; 
+  }
+  .price {
+    text-align: right; 
+    width: 150px;
+  }
+`
+
+export const PriceSummaryDivider = styled.div`
+  margin-top: 7px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 80px;
+
+  hr {
+    width: 250px;
+    border: 1px solid var(--color-blue);
   }
 `

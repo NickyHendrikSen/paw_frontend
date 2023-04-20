@@ -86,7 +86,7 @@ const Login: React.FC = () => {
                 <FormErrorText>{errors.email?.message}</FormErrorText>
                 <FormInput placeholder={"Password"} marginTop='25px' icon={<AiFillLock />} width='60%' type={"password"} name="password" register={register("password")}/>
                 <FormErrorText>{errors.password?.message}</FormErrorText>
-                <Info>Don't have an account? <Link href={"register"}>Register Now</Link></Info>
+                <Info>Don&apos;t have an account? <Link href={"register"}>Register Now</Link></Info>
                 <Button fontSize={15} width='200px' height='50px' marginTop='15px' fill={false}>LOGIN</Button>
               </form>
             </MidSectionContent>
