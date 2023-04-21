@@ -55,7 +55,7 @@ export type OrderState = {
   checkout_session: any,
 }
 
-const OrderDetail: React.FC = () => {
+const Invoice: React.FC = () => {
   const { execute, error, status, value } = useAsync(OrderAPI.getOrder)
   const [ order, setOrder ] = useState<OrderState>()
 
@@ -68,7 +68,7 @@ const OrderDetail: React.FC = () => {
   }
 
   const goToOrderHistory = () => {
-    router.push("/order");
+    router.push("/orders");
   }
 
   useEffect(() => {
@@ -167,4 +167,4 @@ const OrderDetail: React.FC = () => {
   )
 }
 
-export default OrderDetail;
+export default Invoice;

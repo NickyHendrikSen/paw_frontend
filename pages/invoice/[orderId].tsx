@@ -2,14 +2,14 @@ import Head from 'next/head'
 import Header from '@/components/Template/Header';
 import RouteGuard from '@/components/Guards/RouteGuard';
 import SEO from '@/components/SEO/SEO';
-import OrderDetail from '@/components/OrderDetail/OrderDetail';
+import Invoice from '@/components/Invoice/Invoice';
 
-export default function OrderDetailPage()  {
+export default function InvoicePage()  {
   return (
     <RouteGuard>
       <SEO siteTitle="Invoice" description="Invoice page"/>
       {/* <Header /> */}
-      <OrderDetail />
+      <Invoice />
     </RouteGuard>
   )
 }

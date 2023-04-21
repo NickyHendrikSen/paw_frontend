@@ -34,5 +34,7 @@ export const ShippingInformation = styled.div`
   .title {
     font-family: var(--font-helvetica);
     font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
   }
 `

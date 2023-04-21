@@ -69,7 +69,7 @@ const OrderHistory: React.FC = () => {
     <Container paddingTop='50px' paddingBottom='50px'>
       <Modal open={!!order} onClose={closeOrderDetailModal}>
         <OrderModal>
-          <DetailText>Order Detail</DetailText>
+          {/* <DetailText>Order Detail</DetailText> */}
           <OrderIdText><BoldText>Order ID</BoldText> {order?._id}</OrderIdText>
           <OrderDateText><BoldText>Order Date</BoldText> {order && format(new Date(order?.checkout_session?.created*1000), 'dd MMM yyyy')}</OrderDateText>
           <ShippingInformation>

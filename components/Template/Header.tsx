@@ -77,7 +77,7 @@ const Header: React.FC = () => {
             <RxTriangleDown />
             <DropdownProfile>
               <DropdownProfileItem>
-                <Link href="/order">
+                <Link href="/orders">
                   Order History
                 </Link>
               </DropdownProfileItem>

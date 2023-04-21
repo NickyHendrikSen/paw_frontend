@@ -32,7 +32,7 @@ const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOr
 
   const goToInvoice = (e: React.MouseEvent) => {
     e.stopPropagation();
-    router.push(`/order/${order._id}`)
+    router.push(`/invoice/${order._id}`)
   }
 
   const showDetail = () => {
