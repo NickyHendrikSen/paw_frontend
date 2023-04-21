@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   padding: 50px;
   background-color: white;
   border-radius: 5px;
+  outline: none;
 `
 
 export const CheckoutTitle = styled.div`

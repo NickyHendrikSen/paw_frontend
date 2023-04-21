@@ -19,24 +19,35 @@ import {
   Divider
 } from "./OrderHistoryDisplayStyles"
 import { useRouter } from "next/router";
+import { format } from "date-fns";
 
-const OrderHistoryDisplay: React.FC<OrderState> = (props) => {
+type OrderHistoryDisplayProps = {
+  order: OrderState, 
+  showOrderDetail: (id: string) => unknown
+}
+
+const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOrderDetail }) => {
   
   const router = useRouter();
 
+  const goToInvoice = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    router.push(`/order/${order._id}`)
+  }
+
   const showDetail = () => {
-    router.push(`/order/${props._id}`)
+    showOrderDetail(order._id)
   }
 
   return (
     <Wrapper>
       <TopSection>
-        <OrderIdSection><BoldText>Order Id</BoldText> {props._id}</OrderIdSection>
-        <DetailLink onClick={showDetail}>Detail</DetailLink>
+        <OrderIdSection><BoldText>Order Id</BoldText> {order._id} (<span className="date">{format(new Date(order?.checkout_session?.created*1000), 'dd MMM yyyy')}</span>)</OrderIdSection>
+        <DetailLink onClick={goToInvoice}>Invoice</DetailLink>
       </TopSection>
       <InfoWrapper>
         <ProductSection>
-          {props.products?.map((product) => (
+          {order?.products?.map((product) => (
             <ProductItemWrapper>
               <ProductItem>
                 <ImageSection><img src={`http://localhost:8000/${product._product.imageUrl}`} alt="Product Image"/></ImageSection>
@@ -58,15 +69,15 @@ const OrderHistoryDisplay: React.FC<OrderState> = (props) => {
 
       <PriceWrapper fontSize={"16px"} bold={false} marginTop={10}>
         <div className="title">Subtotal</div>
-        <div className="price">${props.subtotal.toFixed(2)}</div>
+        <div className="price">${order.subtotal.toFixed(2)}</div>
       </PriceWrapper>
       <PriceWrapper fontSize={"13px"} bold={false} marginTop={2}>
-        <div className="title">Shipping</div>
-        <div className="price">${props.shipping.toFixed(2)}</div>
+        <div className="title">Shipping (<span onClick={showDetail}>Show details</span>)</div>
+        <div className="price">${order.shipping.toFixed(2)}</div>
       </PriceWrapper>
       <PriceWrapper fontSize={"18px"} bold={true} marginTop={15}>
         <div className="title">Total</div>
-        <div className="price">${props.total.toFixed(2)}</div>
+        <div className="price">${order.total.toFixed(2)}</div>
       </PriceWrapper>
     </Wrapper>
   )

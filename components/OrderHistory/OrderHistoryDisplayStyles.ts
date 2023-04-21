@@ -24,7 +24,10 @@ export const TopSection = styled.div`
 `
 
 export const OrderIdSection = styled.div`
-
+  .date {
+    color: var(--color-gray);
+    font-weight: bold;
+  }
 `
 
 export const DetailLink = styled.div`
@@ -105,6 +108,14 @@ export const PriceWrapper = styled.div<{fontSize: string, bold: boolean, marginT
   .title {
     display: inline-block;
     width: 65%;
+    span {
+      color: var(--color-blue);
+      font-weight: bold;
+      cursor: pointer;
+      &:hover {
+        color: var(--color-light-blue);
+      }
+    }
   }
   .price {
     display: inline-block;
