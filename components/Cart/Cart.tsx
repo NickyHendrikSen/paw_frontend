@@ -91,7 +91,7 @@ const Cart: React.FC = () => {
         <Checkout onClose={onCloseModal} setLoading={setLoading} isLoading={isLoading}/>
       </Modal>
       <TitleText>Cart</TitleText>
-      {cart?.map((c) => (<CartDisplay {...c} refreshCart={refreshCart}></CartDisplay>))}
+      {cart?.map((c) => (<CartDisplay key={c._id} {...c} refreshCart={refreshCart}></CartDisplay>))}
       
       <LineDivider />
       <CheckoutSection>

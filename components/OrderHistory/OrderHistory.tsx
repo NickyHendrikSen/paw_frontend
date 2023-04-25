@@ -16,6 +16,7 @@ import {
 } from "./Styles"
 
 type ProductsType = {
+  _id: string,
   price: number,
   quantity: number,
   _product: {
@@ -85,7 +86,7 @@ const OrderHistory: React.FC = () => {
       <TitleText>Order History</TitleText>
       
       {orders?.map((order) => (
-        <OrderHistoryDisplay order={order} showOrderDetail={showOrderDetailModal}/>
+        <OrderHistoryDisplay key={order._id} order={order} showOrderDetail={showOrderDetailModal}/>
       ))}
 
     </Container>

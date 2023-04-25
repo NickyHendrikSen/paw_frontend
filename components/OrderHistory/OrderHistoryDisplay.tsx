@@ -48,7 +48,7 @@ const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOr
       <InfoWrapper>
         <ProductSection>
           {order?.products?.map((product) => (
-            <ProductItemWrapper>
+            <ProductItemWrapper key={product._id}>
               <ProductItem>
                 <ImageSection><img src={`http://localhost:8000/${product._product.imageUrl}`} alt="Product Image"/></ImageSection>
                 <NameSection>{product._product.name}</NameSection>
