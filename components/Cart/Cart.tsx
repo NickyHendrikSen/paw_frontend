@@ -24,7 +24,9 @@ import {
 type CartState = {
   _product: {
     _id: string,
-    category: string,
+    _category: {
+      display_name: string
+    },
     description: string,
     imageUrl: string,
     name: string,

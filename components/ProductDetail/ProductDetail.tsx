@@ -38,7 +38,10 @@ type Product = {
   name: string,
   imageUrl: string,
   description: string,
-  category: string,
+  _category: {
+    _id: string,
+    display_name: string,
+  },
   stock: number,
   price: number,
 }
@@ -52,7 +55,10 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
     name: "",
     imageUrl: "",
     description: "",
-    category: "",
+    _category: {
+      _id: "",
+      display_name: ""
+    },
     stock: 0,
     price: 0,
   })
@@ -123,7 +129,7 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
         <ImageSection><img src={`http://localhost:8000/${product?.imageUrl}`} alt="Product Image"/></ImageSection>
         <InfoSection>
           <NameSection>{product?.name}</NameSection>
-          <CategorySection>{product?.category}</CategorySection>
+          <CategorySection>{product?._category.display_name}</CategorySection>
           <PriceSection>${product?.price.toFixed(2)}</PriceSection>
           <DescriptionSection>{product?.description}</DescriptionSection>
         </InfoSection>

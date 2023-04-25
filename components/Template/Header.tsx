@@ -104,7 +104,7 @@ const Header: React.FC = () => {
               </Link>
                 <DropdownItem>
                 <Link href="/products?categories=apparel">
-                  Apparel
+                  Apparels
                 </Link>
                 <Link href="/products?categories=collar">
                   Collars
@@ -119,7 +119,7 @@ const Header: React.FC = () => {
                   Toys
                 </Link>
                 <Link href="/products?categories=food">
-                  Food
+                  Foods
                 </Link>
               </DropdownItem>
             </Dropdown>

@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const ProductList = styled.div`
-  margin-top: 50px;
 //   background: red;
 `
 
@@ -54,6 +53,34 @@ export const GridOptionItem = styled.div<{isChosen: boolean}>`
 
     &:hover {
       transform: scale(1.1);
+    }
+  }
+`
+
+export const ProductContentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+`
+
+export const FilterChoiceWrapper = styled.div`
+  min-width: 200px;
+  height: 200px;
+  background: var(--color-very-light-gray);
+`
+
+export const CategoryFilter = styled.div`
+  .text {
+    font-size: 18px;
+    padding: 20px;
+    font-weight: bold;
+  }
+  ul {
+    list-style-type: none;
+    li {
+      background: white;
+      padding: 5px 10px;
     }
   }
 `

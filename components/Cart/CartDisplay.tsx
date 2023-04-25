@@ -24,7 +24,9 @@ import { toast } from 'react-toastify';
 type CartDisplayProps = {
   _product: {
     _id: string,
-    category: string,
+    _category: {
+      display_name: string
+    },
     description: string,
     imageUrl: string,
     name: string,
@@ -36,7 +38,7 @@ type CartDisplayProps = {
 }
 
 const CartDisplay: React.FC<CartDisplayProps> = ({_product, quantity, refreshCart}) => {
-  const { category, description, imageUrl, name, price, stock, _id } = _product;
+  const { _category, description, imageUrl, name, price, stock, _id } = _product;
   const { execute, error, status, value } = useAsync(CartAPI.deleteCart)
 
   const handleDelete = () => {
@@ -56,7 +58,7 @@ const CartDisplay: React.FC<CartDisplayProps> = ({_product, quantity, refreshCar
       <RightSection>
         <InfoSection>
           <NameSection>{name}</NameSection>
-          <CategorySection>{category}</CategorySection>
+          <CategorySection>{_category.display_name}</CategorySection>
           <PriceSection><BoldText>Price </BoldText>${price.toFixed(2)}</PriceSection>
           <StockSection><BoldText>Stock </BoldText>{stock}</StockSection>
         </InfoSection>

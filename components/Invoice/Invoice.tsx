@@ -36,7 +36,7 @@ type ProductsType = {
   quantity: number,
   _product: {
     _id: string,
-    category: string,
+    _category: string,
     description: string,
     imageUrl: string,
     name: string,

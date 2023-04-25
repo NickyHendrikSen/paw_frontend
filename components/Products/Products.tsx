@@ -13,7 +13,10 @@ import {
   ProductBar,
   SortOption,
   GridOption,
-  GridOptionItem
+  GridOptionItem,
+  ProductContentWrapper,
+  FilterChoiceWrapper,
+  CategoryFilter
 } from "./Styles"
 import { TitleText } from '@/styles/Typography';
 import { Select } from '../Form/SelectStyles';
@@ -81,26 +84,38 @@ const Products: React.FC<ProductsProps> = ({params}) => {
           </GridOptionItem>
         </GridOption>
       </ProductBar>
-      {status === "pending" ? <Loading minHeight={"200px"}/> : (
-        <ProductList>
-          {
-          products?.data?.map((v: any) => 
-          (
-            <ProductDisplay 
-              key={v._id}
-              id={v._id}
-              name={v.name}
-              price={v.price}
-              imageUrl={v.imageUrl}  
-              stock={v.stock}  
-              description={v.description}  
-              gridOption={gridOption}
-            />
-          ))
-          }
-        </ProductList>          
-      )}
-      
+      <ProductContentWrapper>
+        <FilterChoiceWrapper>
+          <CategoryFilter>
+            <div className='text'>Category</div>
+            <ul>
+              <li>a</li>
+              <li>b</li>
+              <li>c</li>
+              <li>d</li>
+            </ul>
+          </CategoryFilter>
+        </FilterChoiceWrapper>
+        {status === "pending" ? <Loading minHeight={"200px"}/> : (
+          <ProductList>
+            {
+            products?.data?.map((v: any) => 
+            (
+              <ProductDisplay 
+                key={v._id}
+                id={v._id}
+                name={v.name}
+                price={v.price}
+                imageUrl={v.imageUrl}  
+                stock={v.stock}  
+                description={v.description}  
+                gridOption={gridOption}
+              />
+            ))
+            }
+          </ProductList>          
+        )}
+      </ProductContentWrapper>
     </Container>
   )
 }
