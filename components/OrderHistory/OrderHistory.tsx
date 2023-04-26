@@ -12,7 +12,8 @@ import {
   DetailText,
   OrderIdText,
   OrderDateText,
-  ShippingInformation
+  ShippingInformation,
+  OrderFilterWrapper
 } from "./Styles"
 
 type ProductsType = {
@@ -84,6 +85,9 @@ const OrderHistory: React.FC = () => {
         </OrderModal>
       </Modal>
       <TitleText>Order History</TitleText>
+
+      <OrderFilterWrapper>
+      </OrderFilterWrapper>
       
       {orders?.map((order) => (
         <OrderHistoryDisplay key={order._id} order={order} showOrderDetail={showOrderDetailModal}/>
