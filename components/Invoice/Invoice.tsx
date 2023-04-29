@@ -53,6 +53,7 @@ export type OrderState = {
   subtotal: number,
   total: number,
   checkout_session: any,
+  createdAt: Date,
   _invoice: {
     number: number
   }
@@ -105,7 +106,7 @@ const Invoice: React.FC = () => {
         <TitleText>INVOICE</TitleText>
         <InvoiceInfo>
           <InvoiceNo>INVOICE #{new String(order?._invoice?.number).padStart(8, '0')}</InvoiceNo>
-          <DateText>{format(new Date(order.checkout_session?.created*1000), 'dd MMM yyyy')}</DateText>
+          <DateText>{order?.createdAt && format(new Date(order?.createdAt), 'dd MMM yyyy')}</DateText>
         </InvoiceInfo>
       </InvoiceHeader>
       {/* <OrderIdText>#{order?._id}</OrderIdText> */}

@@ -42,7 +42,7 @@ const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOr
   return (
     <Wrapper>
       <TopSection>
-        <OrderIdSection><BoldText>Order Id</BoldText> {order._id} (<span className="date">{format(new Date(order?.checkout_session?.created*1000), 'dd MMM yyyy')}</span>)</OrderIdSection>
+        <OrderIdSection><BoldText>Order Id</BoldText> {order._id} (<span className="date">{order?.createdAt && format(new Date(order?.createdAt), 'dd MMM yyyy')}</span>)</OrderIdSection>
         <DetailLink onClick={goToInvoice}>Invoice</DetailLink>
       </TopSection>
       <InfoWrapper>

@@ -7,6 +7,7 @@ export const ProductList = styled.div`
 export const SearchText = styled.div`
   font-size: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
 `
 
 export const ProductBar = styled.div`
