@@ -40,5 +40,20 @@ export const ShippingInformation = styled.div`
 `
 
 export const OrderFilterWrapper = styled.div`
+  background-color: var(--color-very-light-gray);
+  padding: 20px;
+  margin-bottom: 50px;
+`
 
+export const DateFilterWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+`
+
+export const FilterText = styled.div`
+  margin-bottom: 20px;
+  font-size: 20px;
 `

@@ -4,8 +4,11 @@ import OrderHistoryDisplay from "./OrderHistoryDisplay";
 import { OrderAPI } from "@/api/apis/OrderAPI";
 import { useAsync } from "@/utils/useAsync";
 import { useEffect, useState } from "react";
-import { Modal } from "@mui/material";
+import { Modal, Pagination } from "@mui/material";
 import { format } from "date-fns";
+import FormInputDate from "../Form/FormInputDate";
+import Loading from "../Loading/Loading";
+import usePrevious from "@/utils/usePrevious";
 
 import {
   OrderModal,
@@ -13,7 +16,9 @@ import {
   OrderIdText,
   OrderDateText,
   ShippingInformation,
-  OrderFilterWrapper
+  OrderFilterWrapper,
+  DateFilterWrapper,
+  FilterText
 } from "./Styles"
 
 type ProductsType = {
@@ -38,13 +43,26 @@ export type OrderState = {
   stripe_total: number,
   subtotal: number,
   total: number,
-  checkout_session: any
+  checkout_session: any,
+  createdAt: Date,
+}
+
+export type PaginationState = {
+  pageCount: number,
+  count: number,
+  skip: number
 }
 
 const OrderHistory: React.FC = () => {
   const { execute, error, status, value } = useAsync(OrderAPI.getOrders)
   const [ orders, setOrders ] = useState<Array<OrderState>>();
   const [ order, setOrder ] = useState<OrderState | undefined>();
+  const [ minDate, setMinDate ] = useState<string | undefined>();
+  const [ maxDate, setMaxDate ] = useState<string | undefined>();
+  const [ pagination, setPagination ] = useState<PaginationState>();
+  const [ currentPage, setCurrentPage ] = useState<number>(1);
+
+  const prevAmount = usePrevious({minDate, maxDate});
 
   const showOrderDetailModal = (id: string) => {
     const order = orders?.find(order => order._id === id);
@@ -57,13 +75,36 @@ const OrderHistory: React.FC = () => {
     setOrder(undefined);
   }
 
+  const handleMinDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMinDate(e.target.value);
+  }
+
+  const handleMaxDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxDate(e.target.value);
+  }
+
+  const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    if(value) {
+      setCurrentPage(value);
+    }
+  }
+
   useEffect(() => {
-    execute({});
-  }, [])
+    if((prevAmount?.maxDate !== maxDate || prevAmount?.minDate !== minDate) && currentPage !== 1) {
+      setCurrentPage(1);
+    }
+    else {
+      execute({
+        ...(minDate && {minDate: minDate}), 
+        ...(maxDate && {maxDate: maxDate}), 
+        ...(currentPage && {page: currentPage})}) 
+    }
+  }, [currentPage, minDate, maxDate])
 
   useEffect(() => {
     if(status === "success") {
       setOrders(value?.data?.orders);
+      setPagination(value?.data?.pagination);
     }
   }, [status])
 
@@ -73,7 +114,7 @@ const OrderHistory: React.FC = () => {
         <OrderModal>
           {/* <DetailText>Order Detail</DetailText> */}
           <OrderIdText><BoldText>Order ID</BoldText> {order?._id}</OrderIdText>
-          <OrderDateText><BoldText>Order Date</BoldText> {order && format(new Date(order?.checkout_session?.created*1000), 'dd MMM yyyy')}</OrderDateText>
+          <OrderDateText><BoldText>Order Date</BoldText> {order && order?.createdAt && format(new Date(order?.createdAt), 'dd MMM yyyy')}</OrderDateText>
           <ShippingInformation>
             <div className="title">Shipping Details</div>
             <div className="text">{order?.checkout_session?.shipping?.name}</div>
@@ -87,11 +128,22 @@ const OrderHistory: React.FC = () => {
       <TitleText>Order History</TitleText>
 
       <OrderFilterWrapper>
+        <DateFilterWrapper>
+          <FormInputDate width="fit-content" isDark={true} value={minDate} onChange={handleMinDateChange}/>
+          &#8211;
+          <FormInputDate width="fit-content" isDark={true} value={maxDate} onChange={handleMaxDateChange}/>
+        </DateFilterWrapper>          
       </OrderFilterWrapper>
-      
-      {orders?.map((order) => (
+
+      <FilterText>
+        Showing {((currentPage-1)*(pagination?.skip ?? 0))+1} - {((currentPage-1)*(pagination?.skip ?? 0))+(orders?.length ?? 0)} of {pagination?.count}
+      </FilterText>
+      {status === "pending" ?
+        <Loading />
+      : orders?.map((order) => (
         <OrderHistoryDisplay key={order._id} order={order} showOrderDetail={showOrderDetailModal}/>
       ))}
+      <Pagination count={pagination?.pageCount ?? 0} onChange={handlePageChange} page={currentPage ?? 1}/>
 
     </Container>
   )
