@@ -6,7 +6,7 @@ export const NameSection = styled.div`
   font-weight: bold;
 `
 export const PriceSection = styled.div`
-  color: var(--color-green);
+  color: var(--color-olive);
   font-weight: bold;
   font-size: 22px;
   margin-top: 20px;

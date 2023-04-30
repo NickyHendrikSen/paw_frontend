@@ -32,7 +32,11 @@ import pawLogo from "../../public/images/paw-logo.png"
 const Header: React.FC = () => {
   const router = useRouter()
   const authContext = useContext(AuthContext)
-  const itemCount = authContext?.user?.cart?.items.length || 0;
+  const itemCount = authContext?.user?.cart?.items?.reduce((accumulator: number, { quantity }: {quantity: number}) => {
+    return accumulator + quantity
+  }, 0) || 0;
+  // const itemCount = 0;
+  // console.log(authContext?.user?.cart?.items)
 
   const [search, setSearch] = useState<string>("");
 
