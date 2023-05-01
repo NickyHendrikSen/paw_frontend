@@ -6,8 +6,15 @@ import { useRouter } from "next/router";
 import ProductDisplay from './ProductDisplay';
 import Image from 'next/image';
 import { ReactSVG } from 'react-svg'
+import { TitleText } from '@/styles/Typography';
+import { Select } from '../Form/SelectStyles';
+import Loading from '../Loading/Loading';
+import { Pagination } from '@mui/material';
+import usePrevious from '@/utils/usePrevious';
+import urlQueryProcessor from '@/utils/urlQueryProcessor';
 
 import {
+  ProductListWrapper,
   ProductList,
   SearchText,
   ProductBar,
@@ -16,47 +23,66 @@ import {
   GridOptionItem,
   ProductContentWrapper,
   FilterChoiceWrapper,
-  CategoryFilter
+  CategoryFilter,
 } from "./Styles"
-import { TitleText } from '@/styles/Typography';
-import { Select } from '../Form/SelectStyles';
-import Loading from '../Loading/Loading';
 
 type ProductsProps = {
   params: {
     categories: string,
-    search: string
+    search: string,
+    page: number,
+    sort: string
   }
 }
 
+type PaginationState = {
+  pageCount: number,
+  count: number,
+  skip: number
+}
+
 const Products: React.FC<ProductsProps> = ({params}) => {
-    const { execute, error, status, value: products } = useAsync(ProductAPI.getProducts)
-    const [ gridOption, setGridOption ] = useState<"grid" | "list">("grid")
-    const [ sort, setSort ] = 
-      useState<"date_desc" | "date_asc" | "name_asc" | "name_desc" | "price_asc" | "price_desc">("name_asc")
-    const router = useRouter()
+  const { execute, error, status, value } = useAsync(ProductAPI.getProducts)
+  const [ products, setProducts ] = useState<Array<any>>();
+  const [ gridOption, setGridOption ] = useState<"grid" | "list">("grid")
+  const [ pagination, setPagination ] = useState<PaginationState>();
 
-    const handleGridChange = (grid: string) => {
-      if(grid === "grid" || grid === "list"){
-        setGridOption(grid);
-      }
-    } 
+  const router = useRouter();
 
-    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const val = e.target.value.toString();
-      if(val == "date_desc" || val == "date_asc" || val == "name_asc" || val == "name_desc" || val == "price_asc" || val == "price_desc") {
-        setSort(val); 
-      }
+  // const prevAmount = usePrevious({...params});
+
+  const handleGridChange = (grid: string) => {
+    if(grid === "grid" || grid === "list"){
+      setGridOption(grid);
     }
+  } 
 
-    useEffect(() => {
-      if(status === "success") {
-      }
-    }, [status])
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value.toString();
+    if(val == "date_desc" || val == "date_asc" || val == "name_asc" || 
+      val == "name_desc" || val == "price_asc" || val == "price_desc") {
+      router.query = urlQueryProcessor("change", "sort", val.toString(), router.query);
+      router.push(router);
+    }
+  }
 
-    useEffect(() => {
-        execute({...params, sort: sort})
-    }, [params, sort]);
+  const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    if(value) {
+      router.query = urlQueryProcessor("change", "page", value.toString(), router.query);
+      router.push(router);
+    }
+  }
+
+  useEffect(() => {
+    if(status === "success") {
+      setProducts(value?.data?.products);
+      setPagination(value?.data?.pagination);
+    }
+  }, [status])
+
+  useEffect(() => {
+    execute({...params})
+  }, [params]);
 
   return (
     <Container paddingTop='50px'>
@@ -97,25 +123,33 @@ const Products: React.FC<ProductsProps> = ({params}) => {
           </CategoryFilter>
         </FilterChoiceWrapper>
         {status === "pending" ? <Loading minHeight={"200px"}/> : (
-          <ProductList>
-            {
-            products?.data?.map((v: any) => 
-            (
-              <ProductDisplay 
-                key={v._id}
-                id={v._id}
-                name={v.name}
-                price={v.price}
-                imageUrl={v.imageUrl}  
-                stock={v.stock}  
-                description={v.description}  
-                gridOption={gridOption}
-              />
-            ))
-            }
-          </ProductList>          
+          <ProductListWrapper>
+            <ProductList>
+              {
+              products?.map((v: any) => 
+              (
+                <ProductDisplay 
+                  key={v._id}
+                  id={v._id}
+                  name={v.name}
+                  price={v.price}
+                  imageUrl={v.imageUrl}  
+                  stock={v.stock}  
+                  description={v.description}  
+                  gridOption={gridOption}
+                />
+              ))
+              }
+            </ProductList>
+            <Pagination 
+              count={pagination?.pageCount ?? 0} 
+              onChange={handlePageChange} 
+              page={params.page ?? 1} 
+              className='pagination'/>      
+          </ProductListWrapper>    
         )}
       </ProductContentWrapper>
+      
     </Container>
   )
 }

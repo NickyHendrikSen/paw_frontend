@@ -1,5 +1,17 @@
 import styled from "styled-components"
 
+export const ProductListWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .pagination {
+    margin-top: 50px;
+  }
+`
+
 export const ProductList = styled.div`
 //   background: red;
 `
@@ -68,6 +80,7 @@ export const ProductContentWrapper = styled.div`
 export const FilterChoiceWrapper = styled.div`
   min-width: 200px;
   height: 200px;
+  flex-shrink: 0;
   background: var(--color-very-light-gray);
 `
 

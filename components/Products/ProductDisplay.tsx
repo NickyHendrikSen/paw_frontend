@@ -40,7 +40,7 @@ const ProductDisplay: React.FC<ProductProps> = ({
       {isSoldOut && <SoldOut>Sold Out</SoldOut>}
       <ImageSection><img src={`http://localhost:8000/${imageUrl}`} alt="Product Image"/></ImageSection>
       <InfoSection>
-        <PriceSection>${price.toFixed(2)}</PriceSection>
+        <PriceSection>${Number(price).toFixed(2)}</PriceSection>
         <NameSection>{name}</NameSection>
         <DescriptionSection>{description}</DescriptionSection>
         <StockSection>Stock : {stock.toString()}</StockSection>

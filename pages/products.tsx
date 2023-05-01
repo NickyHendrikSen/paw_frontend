@@ -8,14 +8,17 @@ import SEO from '@/components/SEO/SEO';
 
 type ParamsStateType = {
   categories: string,
-  search: string
+  search: string,
+  page: number,
+  sort: string
 }
 
 export default function ProductsPage() {
 
   const router = useRouter();
   const { query, isReady } = router;
-  const { categories: paramCategories, search: paramSearch } = query;
+  const { categories: paramCategories, search: paramSearch, 
+          page: paramPage, sort: paramSort } = query;
   const [params, setParams] = useState<ParamsStateType | undefined>()
 
   useEffect(() => {
@@ -23,8 +26,15 @@ export default function ProductsPage() {
 
     const categories = paramCategories ? paramCategories.toString() : ""
     const search = paramSearch ? paramSearch.toString() : "";
+    const sort = paramSort ? paramSort.toString() : "";
+    let page = 1;
     
-    setParams({categories: categories, search: search})
+    try { 
+      page = parseInt(paramPage?.toString() ?? "")
+    }
+    catch {}
+    
+    setParams({categories: categories, search: search, page: isNaN(page) ? 1 : page, sort: sort})
   }, [query, isReady, paramCategories, paramSearch])
   
   if(!params) return null;

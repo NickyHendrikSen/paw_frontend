@@ -47,7 +47,7 @@ export type OrderState = {
   createdAt: Date,
 }
 
-export type PaginationState = {
+type PaginationState = {
   pageCount: number,
   count: number,
   skip: number
