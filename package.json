@@ -34,6 +34,7 @@
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
+    "react-store-locator": "^0.20.7",
     "react-svg": "^16.1.7",
     "react-toastify": "^9.1.2",
     "sharp": "^0.32.0",
@@ -43,6 +44,11 @@
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.6",
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0"
   }
 }

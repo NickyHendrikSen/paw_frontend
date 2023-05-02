@@ -1,11 +1,12 @@
 import { TitleText } from "@/styles/Typography";
 import Container from "../Template/Container";
+import Link from "next/link";
+
 import {
   AboutText,
   StoreNavigation,
   Highlight
 } from "./Styles"
-import Link from "next/link";
 
 const About: React.FC = () => {
   return (

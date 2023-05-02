@@ -1,6 +1,8 @@
 import { BoldText, TitleText } from "@/styles/Typography";
 import Container from "../Template/Container";
 import { OrderState } from "./OrderHistory";
+import { useRouter } from "next/router";
+import { format } from "date-fns";
 
 import {
   Wrapper,
@@ -18,8 +20,6 @@ import {
   PriceWrapper,
   Divider
 } from "./OrderHistoryDisplayStyles"
-import { useRouter } from "next/router";
-import { format } from "date-fns";
 
 type OrderHistoryDisplayProps = {
   order: OrderState, 
