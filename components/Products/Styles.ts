@@ -100,7 +100,7 @@ export const CategoryFilter = styled.div`
 `
 
 export const CategoryWrapper = styled.div`
-  background: var(--color-light-gray);
+  background: var(--color-very-light-gray);
   padding: 20px;
   margin-bottom: 15px;
 `
