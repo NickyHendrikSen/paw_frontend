@@ -18,13 +18,19 @@ import { useContext } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import { BsDiscord, BsInstagram, BsTwitch, BsTwitter } from "react-icons/bs";
 import { ImFacebook } from "react-icons/im";
+import { useRouter } from "next/router";
 
 const Footer: React.FC = () => {
     
   const authContext = useContext(AuthContext)
+  const router = useRouter();
 
   const handleLogout = () => {
     authContext?.logout()
+  }
+
+  const goToHome = () => {
+    router.push('/')
   }
 
   return (
@@ -32,7 +38,7 @@ const Footer: React.FC = () => {
       <Container paddingTop="64px" paddingBottom="64px">
         <Wrapper>
           <div>
-            <LogoSlogan>
+            <LogoSlogan onClick={goToHome}>
               <Image src={pawLogo} alt="logo"/>
               <div className="slogan">YOUR DOG'S<br />BESTFRIEND</div>
             </LogoSlogan>
@@ -106,7 +112,7 @@ const Footer: React.FC = () => {
               <BsTwitch />
             </SocialMedia>
           </SocialMediaSection>
-          <CopyrightText>©Copyright {new Date().getFullYear().toString()}. All rights reserved.</CopyrightText>
+          <CopyrightText>© Copyright {new Date().getFullYear().toString()}. All rights reserved.</CopyrightText>
         </BottomWrapper>
       </Container>
     </FooterSection>

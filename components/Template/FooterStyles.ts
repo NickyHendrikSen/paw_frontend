@@ -17,6 +17,9 @@ export const Wrapper = styled.div`
 `
 
 export const LogoSlogan = styled.div`
+  cursor: pointer;
+  transition-duration: 0.2s;
+
   img {
     height: 43px;
     width: 121px;
@@ -25,6 +28,10 @@ export const LogoSlogan = styled.div`
     font-family: var(--font-helvetica);
     font-weight: bold;
     text-align: center;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 `
 
