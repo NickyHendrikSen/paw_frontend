@@ -130,7 +130,7 @@ const Header: React.FC = () => {
             <Link href="/location">
               Our Location
             </Link>
-            <Link href="/about-us">
+            <Link href="/about">
               About Us
             </Link>
             {authContext?.isAuthenticated() && authContext?.isAdmin() ? 
