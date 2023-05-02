@@ -98,3 +98,34 @@ export const CategoryFilter = styled.div`
     }
   }
 `
+
+export const CategoryWrapper = styled.div`
+  background: var(--color-light-gray);
+  padding: 20px;
+  margin-bottom: 15px;
+`
+
+export const CategoryItem = styled.div`
+  background: var(--color-blue);
+  padding: red;
+  text-transform: capitalize;  
+  display: inline-block;
+  margin-right: 20px;
+
+  span {
+    padding: 10px;
+    color: white;
+  }
+  button {
+    padding: 10px;
+    background: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition-duration: 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+`

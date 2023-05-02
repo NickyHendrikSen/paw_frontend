@@ -47,9 +47,7 @@ export const CategorySection = styled.div`
   // font-color: var(--color-light-gray);
   font-family: var(--font-helvetica);
   font-size: 12px;
-  &:first-letter {
-    text-transform: uppercase;
-  }
+  text-transform: capitalize;
 `
 
 export const StockSection = styled.div`

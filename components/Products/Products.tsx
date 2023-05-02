@@ -24,6 +24,8 @@ import {
   ProductContentWrapper,
   FilterChoiceWrapper,
   CategoryFilter,
+  CategoryWrapper,
+  CategoryItem
 } from "./Styles"
 
 type ProductsProps = {
@@ -73,6 +75,13 @@ const Products: React.FC<ProductsProps> = ({params}) => {
     }
   }
 
+  const removeCategory = (value: string) => {
+    if(value) {
+      router.query = urlQueryProcessor("remove", "categories", value.toString(), router.query);
+      router.push(router);
+    }
+  }
+
   useEffect(() => {
     if(status === "success") {
       setProducts(value?.data?.products);
@@ -87,6 +96,19 @@ const Products: React.FC<ProductsProps> = ({params}) => {
   return (
     <Container paddingTop='50px'>
       <TitleText>Products</TitleText>
+      {
+        params.categories &&
+        <CategoryWrapper>
+          {
+            params.categories.split(',').map((category) => (
+              <CategoryItem>
+                <span>{category}</span>
+                <button onClick={() => removeCategory(category)}>X</button>
+              </CategoryItem>
+            ))
+          }
+        </CategoryWrapper>
+      }
       {params.search && <SearchText>Showing search result(s) for &quot;{params.search}&quot;</SearchText>}
       <ProductBar>
         <SortOption>

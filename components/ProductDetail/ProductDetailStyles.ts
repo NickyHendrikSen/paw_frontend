@@ -45,10 +45,7 @@ export const CategorySection = styled.div`
   font-color: var(--color-light-gray);
   font-size: 16px;
   margin-top: 4px;
-
-  &:first-letter {
-    text-transform: uppercase;
-  }
+  text-transform: capitalize;
 `
 
 export const DescriptionSection = styled.div`
