@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Header from '@/components/Template/Header';
 import Products from '@/components/Products/Products';
 import SEO from '@/components/SEO/SEO';
+import Footer from '@/components/Template/Footer';
 
 type ParamsStateType = {
   categories: string,
@@ -44,6 +45,7 @@ export default function ProductsPage() {
       <SEO siteTitle="Products" description="Paw products page"/>
       <Header />
       <Products params={params}/>
+      <Footer />
     </>
   )
 }
