@@ -99,7 +99,12 @@ export const CategoryList = styled.ul`
     padding: 10px 20px;
     cursor: pointer;
     transition-duration: 0.2s;
-    
+
+    &.picked {
+      background-color: var(--color-blue);
+      color: white;
+    }
+
     &:hover {
       background-color: var(--color-blue);
       color: white;

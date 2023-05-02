@@ -11,16 +11,25 @@ const urlQueryProcessor = (
   }
   else if(type == "add") {
     const list = query[paramName]?.toString().split(",");
-    if(!list?.find(x => x == value)) {
+    if(list && !list?.find(x => x == value) && list[0].toString() !== "") {
       list?.push(value)
       query[paramName] = list?.join(',')
+    }
+    else {
+      query[paramName] = value
     }
   }
   else if(type == "remove") {
     const list = query[paramName]?.toString().split(",");
     if(list?.find(x => x == value)) {
       list?.splice(list.findIndex(x => x == value), 1);
-      query[paramName] = list?.join(',')
+      if(list.length == 0) {
+        delete query[paramName];
+      }
+      else {
+        query[paramName] = list?.join(',')
+      }
+      console.log(query);
     }
   }
   return query;

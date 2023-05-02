@@ -10,6 +10,8 @@ import { Select } from '../Form/SelectStyles';
 import Loading from '../Loading/Loading';
 import { Pagination } from '@mui/material';
 import urlQueryProcessor from '@/utils/urlQueryProcessor';
+import { Category } from 'paw-global-type';
+import { CategoryAPI } from '@/api/apis/CategoryAPI';
 
 import {
   ProductListWrapper,
@@ -26,8 +28,6 @@ import {
   CategoryWrapper,
   CategoryItem
 } from "./Styles"
-import { Category } from 'paw-global-type';
-import { CategoryAPI } from '@/api/apis/CategoryAPI';
 
 type ProductsProps = {
   params: {
@@ -85,9 +85,18 @@ const Products: React.FC<ProductsProps> = ({params}) => {
     }
   }
 
+  const categoryIsPicked = (category: string) => {
+    return !!params.categories.split(',')?.find(c => c == category);
+  }
+
   const categoryPicked = (value: string) => {
-    router.query = urlQueryProcessor("add", "categories", value.toString(), router.query);
-    router.push(router);
+    if(categoryIsPicked(value)) {
+      removeCategory(value);
+    }
+    else {
+      router.query = urlQueryProcessor("add", "categories", value.toString(), router.query);
+      router.push(router);
+    }
   }
 
   useEffect(() => {
@@ -157,7 +166,9 @@ const Products: React.FC<ProductsProps> = ({params}) => {
             <CategoryList>
               {
                 categories && categories.map((category) => (
-                  <li key={category._id} onClick={() => categoryPicked(category.slug)}>{category.display_name}</li>
+                  <li key={category._id} onClick={() => categoryPicked(category.slug)} className={categoryIsPicked(category.slug) ? 'picked' : ''}>
+                    {category.display_name}
+                  </li>
                 ))
               }
             </CategoryList>
