@@ -4,13 +4,11 @@ import Container from "../Template/Container";
 import { ProductAPI } from "@/api/apis/ProductAPI";
 import { useRouter } from "next/router";
 import ProductDisplay from './ProductDisplay';
-import Image from 'next/image';
 import { ReactSVG } from 'react-svg'
 import { TitleText } from '@/styles/Typography';
 import { Select } from '../Form/SelectStyles';
 import Loading from '../Loading/Loading';
 import { Pagination } from '@mui/material';
-import usePrevious from '@/utils/usePrevious';
 import urlQueryProcessor from '@/utils/urlQueryProcessor';
 
 import {
@@ -24,9 +22,12 @@ import {
   ProductContentWrapper,
   FilterChoiceWrapper,
   CategoryFilter,
+  CategoryList,
   CategoryWrapper,
   CategoryItem
 } from "./Styles"
+import { Category } from 'paw-global-type';
+import { CategoryAPI } from '@/api/apis/CategoryAPI';
 
 type ProductsProps = {
   params: {
@@ -44,8 +45,10 @@ type PaginationState = {
 }
 
 const Products: React.FC<ProductsProps> = ({params}) => {
+  const { execute: executeCategories, status: statusCategories, value: valueCategories } = useAsync(CategoryAPI.getCategories);
   const { execute, error, status, value } = useAsync(ProductAPI.getProducts)
   const [ products, setProducts ] = useState<Array<any>>();
+  const [ categories, setCategories ] = useState<Array<Category>>();
   const [ gridOption, setGridOption ] = useState<"grid" | "list">("grid")
   const [ pagination, setPagination ] = useState<PaginationState>();
 
@@ -82,6 +85,11 @@ const Products: React.FC<ProductsProps> = ({params}) => {
     }
   }
 
+  const categoryPicked = (value: string) => {
+    router.query = urlQueryProcessor("add", "categories", value.toString(), router.query);
+    router.push(router);
+  }
+
   useEffect(() => {
     if(status === "success") {
       setProducts(value?.data?.products);
@@ -90,8 +98,18 @@ const Products: React.FC<ProductsProps> = ({params}) => {
   }, [status])
 
   useEffect(() => {
+    if(statusCategories === "success") {
+      setCategories(valueCategories?.data?.categories);
+    }
+  }, [statusCategories])
+
+  useEffect(() => {
     execute({...params})
   }, [params]);
+
+  useEffect(() => {
+    executeCategories({})
+  }, [])
 
   return (
     <Container paddingTop='50px'>
@@ -136,12 +154,13 @@ const Products: React.FC<ProductsProps> = ({params}) => {
         <FilterChoiceWrapper>
           <CategoryFilter>
             <div className='text'>Category</div>
-            <ul>
-              <li>a</li>
-              <li>b</li>
-              <li>c</li>
-              <li>d</li>
-            </ul>
+            <CategoryList>
+              {
+                categories && categories.map((category) => (
+                  <li key={category._id} onClick={() => categoryPicked(category.slug)}>{category.display_name}</li>
+                ))
+              }
+            </CategoryList>
           </CategoryFilter>
         </FilterChoiceWrapper>
         {status === "pending" ? <Loading minHeight={"200px"}/> : (

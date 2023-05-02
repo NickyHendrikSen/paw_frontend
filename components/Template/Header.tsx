@@ -28,15 +28,19 @@ import {
 } from "./HeaderStyles"
   
 import pawLogo from "../../public/images/paw-logo.png"
+import { useAsync } from "@/utils/useAsync";
+import { CategoryAPI } from "@/api/apis/CategoryAPI";
+import { Category } from "paw-global-type";
 
 const Header: React.FC = () => {
+  const { execute, error, status, value } = useAsync(CategoryAPI.getCategories);
+  const [ categories, setCategories ] = useState<Array<Category>>();
+
   const router = useRouter()
   const authContext = useContext(AuthContext)
   const itemCount = authContext?.user?.cart?.items?.reduce((accumulator: number, { quantity }: {quantity: number}) => {
     return accumulator + quantity
   }, 0) || 0;
-  // const itemCount = 0;
-  // console.log(authContext?.user?.cart?.items)
 
   const [search, setSearch] = useState<string>("");
 
@@ -57,6 +61,16 @@ const Header: React.FC = () => {
   const toCart = () => {
     router.push("/cart");
   }
+
+  useEffect(() => {
+    if(status === "success") {
+      setCategories(value?.data?.categories);
+    }
+  }, [status])
+
+  useEffect(() => {
+    execute({});
+  }, [])
 
   return (
     <HeaderContainer>
@@ -107,24 +121,13 @@ const Header: React.FC = () => {
                 Products
               </Link>
                 <DropdownItem>
-                <Link href="/products?categories=apparel">
-                  Apparels
-                </Link>
-                <Link href="/products?categories=collar">
-                  Collars
-                </Link>
-                <Link href="/products?categories=treat">
-                  Treats
-                </Link>
-                <Link href="/products?categories=leash">
-                  Leashes
-                </Link>
-                <Link href="/products?categories=toy">
-                  Toys
-                </Link>
-                <Link href="/products?categories=food">
-                  Foods
-                </Link>
+                  {
+                    categories && categories.map((category) => (
+                      <Link href={`/products?categories=${category.slug}`}>
+                        {category.display_name}
+                      </Link>
+                    ))
+                  }
               </DropdownItem>
             </Dropdown>
             <Link href="/location">

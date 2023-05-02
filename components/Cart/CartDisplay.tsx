@@ -20,13 +20,12 @@ import {
   DeleteIcon
 } from "./CartDisplayStyles"
 import { toast } from 'react-toastify';
+import { Category } from 'paw-global-type';
 
 type CartDisplayProps = {
   _product: {
     _id: string,
-    _category: {
-      display_name: string
-    },
+    _category: Category,
     description: string,
     imageUrl: string,
     name: string,

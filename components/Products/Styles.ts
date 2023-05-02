@@ -90,11 +90,19 @@ export const CategoryFilter = styled.div`
     padding: 20px;
     font-weight: bold;
   }
-  ul {
-    list-style-type: none;
-    li {
-      background: white;
-      padding: 5px 10px;
+`
+
+export const CategoryList = styled.ul`
+  list-style-type: none;
+  li {
+    background: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    
+    &:hover {
+      background-color: var(--color-blue);
+      color: white;
     }
   }
 `

@@ -28,6 +28,7 @@ import {
   StockSection,
   AddToCartSection,
 } from "./ProductDetailStyles"
+import { Category } from 'paw-global-type';
 
 type ProductsProps = {
   productId: string
@@ -38,10 +39,7 @@ type Product = {
   name: string,
   imageUrl: string,
   description: string,
-  _category: {
-    _id: string,
-    display_name: string,
-  },
+  _category: Category,
   stock: number,
   price: number,
 }
@@ -57,7 +55,8 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
     description: "",
     _category: {
       _id: "",
-      display_name: ""
+      display_name: "",
+      slug: ""
     },
     stock: 0,
     price: 0,
