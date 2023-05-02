@@ -23,10 +23,11 @@ import { format } from "date-fns";
 
 type OrderHistoryDisplayProps = {
   order: OrderState, 
-  showOrderDetail: (id: string) => unknown
+  showOrderDetail: (id: string) => unknown,
+  isLast?: boolean
 }
 
-const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOrderDetail }) => {
+const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOrderDetail, isLast }) => {
   
   const router = useRouter();
 
@@ -40,7 +41,7 @@ const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOr
   }
 
   return (
-    <Wrapper>
+    <Wrapper isLast={isLast ?? false}>
       <TopSection>
         <OrderIdSection><BoldText>Order Id</BoldText> {order._id} (<span className="date">{order?.createdAt && format(new Date(order?.createdAt), 'dd MMM yyyy')}</span>)</OrderIdSection>
         <DetailLink onClick={goToInvoice}>Invoice</DetailLink>

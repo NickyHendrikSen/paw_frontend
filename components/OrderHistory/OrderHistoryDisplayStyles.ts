@@ -1,14 +1,13 @@
 import styled from "styled-components"
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{isLast: boolean}>`
   border-top: 1px solid var(--color-gray);
 //   cursor: pointer;
   padding: 20px;
   transition-duration: 0.2s;
 
-  &:last-child {
-    border-bottom: 1px solid var(--color-gray);
-  }
+  ${props => props.isLast && `border-bottom: 1px solid var(--color-gray);`}
+  
   &:hover {
     background: rgba(0,0,0,0.05);
   }

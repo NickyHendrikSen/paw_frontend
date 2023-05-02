@@ -18,7 +18,8 @@ import {
   ShippingInformation,
   OrderFilterWrapper,
   DateFilterWrapper,
-  FilterText
+  FilterText,
+  PaginationWrapper
 } from "./Styles"
 
 type ProductsType = {
@@ -140,10 +141,12 @@ const OrderHistory: React.FC = () => {
       </FilterText>
       {status === "pending" ?
         <Loading />
-      : orders?.map((order) => (
-        <OrderHistoryDisplay key={order._id} order={order} showOrderDetail={showOrderDetailModal}/>
+      : orders?.map((order, i) => (
+        <OrderHistoryDisplay key={order._id} order={order} showOrderDetail={showOrderDetailModal} isLast={orders?.length === i+1}/>
       ))}
-      <Pagination count={pagination?.pageCount ?? 0} onChange={handlePageChange} page={currentPage ?? 1}/>
+      <PaginationWrapper>
+        <Pagination count={pagination?.pageCount ?? 0} onChange={handlePageChange} page={currentPage ?? 1}/>
+      </PaginationWrapper>
 
     </Container>
   )

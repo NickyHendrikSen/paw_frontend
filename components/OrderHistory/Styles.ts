@@ -57,3 +57,12 @@ export const FilterText = styled.div`
   margin-bottom: 20px;
   font-size: 20px;
 `
+
+export const PaginationWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+`
