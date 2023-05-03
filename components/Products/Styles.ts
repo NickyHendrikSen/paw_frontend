@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const ProductListWrapper = styled.div`
-  width: 100%;
+  width: calc(100% - 250px);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -14,6 +14,7 @@ export const ProductListWrapper = styled.div`
 
 export const ProductList = styled.div`
 //   background: red;
+  width: 100%;
 `
 
 export const SearchText = styled.div`
@@ -78,7 +79,7 @@ export const ProductContentWrapper = styled.div`
 `
 
 export const FilterChoiceWrapper = styled.div`
-  min-width: 200px;
+  width: 200px;
   height: 100%;
   flex-shrink: 0;
   background: var(--color-very-light-gray);
