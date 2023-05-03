@@ -10,7 +10,7 @@ import {
 
 const About: React.FC = () => {
   return (
-    <Container paddingTop="50px">
+    <Container paddingTop="50px" fullWidthResponsiveness={900}>
       <TitleText>About Us</TitleText>
       <AboutText>This is an about page. Since this is a <Highlight>portfolio website</Highlight>, 
         I will place an auto-generated text below, created by <Highlight>ChatGPT</Highlight>, to serve as a placeholder and give an idea of what it will look like.
