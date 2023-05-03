@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prod": "git pull && npm run build && npm start",
+    "prod": "git pull && npm install && npm run build && npm start",
     "lint": "next lint"
   },
   "dependencies": {
