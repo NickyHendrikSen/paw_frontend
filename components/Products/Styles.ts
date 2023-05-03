@@ -79,7 +79,7 @@ export const ProductContentWrapper = styled.div`
 
 export const FilterChoiceWrapper = styled.div`
   min-width: 200px;
-  // height: 200px;
+  height: 100%;
   flex-shrink: 0;
   background: var(--color-very-light-gray);
 `
@@ -99,6 +99,7 @@ export const CategoryList = styled.ul`
     padding: 10px 20px;
     cursor: pointer;
     transition-duration: 0.2s;
+    margin: 0px 5px 5px 5px;
 
     &.picked {
       background-color: var(--color-blue);
