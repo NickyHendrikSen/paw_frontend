@@ -5,7 +5,7 @@ import { getCookie } from "cookies-next";
 
 // const authContext = useContext(AuthContext)
 const TOKEN_NAME = "token"
-const apiURL = 'http://localhost:8000';
+const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
 export const axiosClient = axios.create({
     baseURL: apiURL,

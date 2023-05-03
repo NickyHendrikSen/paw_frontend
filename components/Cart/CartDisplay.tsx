@@ -51,7 +51,7 @@ const CartDisplay: React.FC<CartDisplayProps> = ({_product, quantity, refreshCar
 
   return (
     <Wrapper>
-      <ImageSection><img src={`http://localhost:8000/${imageUrl}`} alt="Product Image"/></ImageSection>
+      <ImageSection><img src={`${process.env.NEXT_PUBLIC_API_URL}/${imageUrl}`} alt="Product Image"/></ImageSection>
       <RightSection>
         <InfoSection>
           <NameSection>{name}</NameSection>

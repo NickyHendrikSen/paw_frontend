@@ -50,7 +50,7 @@ const OrderHistoryDisplay: React.FC<OrderHistoryDisplayProps> = ({ order, showOr
           {order?.products?.map((product) => (
             <ProductItemWrapper key={product._id}>
               <ProductItem>
-                <ImageSection><img src={`http://localhost:8000/${product._product.imageUrl}`} alt="Product Image"/></ImageSection>
+                <ImageSection><img src={`${process.env.NEXT_PUBLIC_API_URL}/${product._product.imageUrl}`} alt="Product Image"/></ImageSection>
                 <NameSection>{product._product.name}</NameSection>
                 <QuantityPriceSection>{product.quantity} quantity x ${product.price.toFixed(2)}</QuantityPriceSection>
               </ProductItem>

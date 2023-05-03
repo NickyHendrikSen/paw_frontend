@@ -38,7 +38,7 @@ const ProductDisplay: React.FC<ProductProps> = ({
     <Wrapper isSoldOut={isSoldOut} gridOption={gridOption} onClick={goToDetails}>
       {isLastStock && <LastStock>Last Stock</LastStock>}
       {isSoldOut && <SoldOut>Sold Out</SoldOut>}
-      <ImageSection><img src={`http://localhost:8000/${imageUrl}`} alt="Product Image"/></ImageSection>
+      <ImageSection><img src={`${process.env.NEXT_PUBLIC_API_URL}/${imageUrl}`} alt="Product Image"/></ImageSection>
       <InfoSection>
         <PriceSection>${Number(price).toFixed(2)}</PriceSection>
         <NameSection>{name}</NameSection>

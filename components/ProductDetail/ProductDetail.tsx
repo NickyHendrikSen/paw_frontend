@@ -125,7 +125,7 @@ const ProductDetail: React.FC<ProductsProps> = ({productId}) => {
   return (
     <Container paddingTop='50px'>
       <Wrapper>
-        <ImageSection><img src={`http://localhost:8000/${product?.imageUrl}`} alt="Product Image"/></ImageSection>
+        <ImageSection><img src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.imageUrl}`} alt="Product Image"/></ImageSection>
         <InfoSection>
           <NameSection>{product?.name}</NameSection>
           <CategorySection>{product?._category.display_name}</CategorySection>
