@@ -1,13 +1,5 @@
 import styled from "styled-components"
 
-export const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  // overflow-y: hidden;
-`
-
 export const LeftContainer = styled.div`
   width: 50%;
   height: 100vh;
@@ -85,4 +77,24 @@ export const RightContainer = styled.div`
   padding: 40px;
   width: 50%;
   background-color: var(--color-blue);
+`
+
+export const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+
+  @media screen and (max-width: 770px) {
+    ${LeftContainer} {
+      width: 100vw;
+    }
+    ${RightContainer} {
+      position: absolute;
+      width: 100vw;
+      background-color: transparent;
+      height: 100%;
+    }
+  }
 `
