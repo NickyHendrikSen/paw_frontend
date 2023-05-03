@@ -121,7 +121,7 @@ const Products: React.FC<ProductsProps> = ({params}) => {
   }, [])
 
   return (
-    <Container paddingTop='50px'>
+    <Container paddingTop='50px' fullWidthResponsiveness={950}>
       <TitleText>Products</TitleText>
       {
         params.categories &&

@@ -71,6 +71,37 @@ export const Wrapper = styled.div<{isSoldOut: boolean, gridOption: "grid" | "lis
   &:nth-child(n+5){
     margin-top: 20px;
   }
+
+  @media screen and (max-width: 1300px) {
+    width: calc(33.3% - 15px);
+
+    &:nth-child(4n+1) {
+      margin-left: 15px;
+    }
+    &:nth-child(3n+1), &:nth-child(1) {
+      margin-left: 0px;
+    }
+    &:nth-child(n+5){
+      margin-top: 20px;
+    }
+  }
+
+  @media screen and (max-width: 1100px) and (min-width: 950px) {
+    width: calc(50% - 15px);
+
+    &:nth-child(4n+1) {
+      margin-left: 15px;
+    }
+    &:nth-child(3n+1) {
+      margin-left: 15px;
+    }
+    &:nth-child(2n+1), &:nth-child(1) {
+      margin-left: 0px;
+    }
+    &:nth-child(n+3){
+      margin-top: 20px;
+    }
+  }
   ` : `
   display: flex;
   position: relative;

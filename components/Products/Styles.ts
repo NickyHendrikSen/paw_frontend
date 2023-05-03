@@ -10,6 +10,14 @@ export const ProductListWrapper = styled.div`
   .pagination {
     margin-top: 50px;
   }
+
+  @media screen and (max-width: 1100px) {
+    width: calc(100% - 200px);
+  }
+
+  @media screen and (max-width: 850px) {
+    width: 100%;
+  }
 `
 
 export const ProductList = styled.div`
@@ -76,6 +84,10 @@ export const ProductContentWrapper = styled.div`
   justify-content: center;
   gap: 50px;
   margin-top: 50px;
+
+  @media screen and (max-width: 850px) {
+    display: block;
+  }
 `
 
 export const FilterChoiceWrapper = styled.div`
@@ -83,12 +95,22 @@ export const FilterChoiceWrapper = styled.div`
   height: 100%;
   flex-shrink: 0;
   background: var(--color-very-light-gray);
+  padding: 5px;
+
+  @media screen and (max-width: 1100px) {
+    width: 150px;
+  }
+
+  @media screen and (max-width: 850px) {
+    width: 100%;
+    margin-bottom: 50px;
+  }
 `
 
 export const CategoryFilter = styled.div`
   .text {
     font-size: 18px;
-    padding: 20px;
+    padding: 15px;
     font-weight: bold;
   }
 `
@@ -100,7 +122,10 @@ export const CategoryList = styled.ul`
     padding: 10px 20px;
     cursor: pointer;
     transition-duration: 0.2s;
-    margin: 0px 5px 5px 5px;
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &.picked {
       background-color: var(--color-blue);
