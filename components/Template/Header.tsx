@@ -123,7 +123,7 @@ const Header: React.FC = () => {
                 <DropdownItem>
                   {
                     categories && categories.map((category) => (
-                      <Link href={`/products?categories=${category.slug}`}>
+                      <Link href={`/products?categories=${category.slug}`} key={category._id}>
                         {category.display_name}
                       </Link>
                     ))

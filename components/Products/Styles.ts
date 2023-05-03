@@ -79,7 +79,7 @@ export const ProductContentWrapper = styled.div`
 
 export const FilterChoiceWrapper = styled.div`
   min-width: 200px;
-  height: 200px;
+  // height: 200px;
   flex-shrink: 0;
   background: var(--color-very-light-gray);
 `

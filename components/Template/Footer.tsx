@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
           <div>
             <LogoSlogan onClick={goToHome}>
               <Image src={pawLogo} alt="logo"/>
-              <div className="slogan">YOUR DOG'S<br />BESTFRIEND</div>
+              <div className="slogan">YOUR DOG&apos;S<br />BESTFRIEND</div>
             </LogoSlogan>
           </div>
           <div>

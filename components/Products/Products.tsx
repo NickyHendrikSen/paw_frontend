@@ -127,8 +127,8 @@ const Products: React.FC<ProductsProps> = ({params}) => {
         params.categories &&
         <CategoryWrapper>
           {
-            params.categories.split(',').map((category) => (
-              <CategoryItem>
+            params.categories.split(',').map((category, i) => (
+              <CategoryItem key={category + "_" + i}>
                 <span>{category}</span>
                 <button onClick={() => removeCategory(category)}>X</button>
               </CategoryItem>

@@ -140,7 +140,7 @@ const Invoice: React.FC = () => {
           </ProductListHead>
           <ProductListBody>
             {order?.products?.map((product) => (
-              <tr>
+              <tr key={product._product._id}>
                 <td className="left">{product._product.name}</td>
                 <td className="right">{product.quantity}</td>
                 <td className="right">${(product._product.price)?.toFixed(2)}</td>
