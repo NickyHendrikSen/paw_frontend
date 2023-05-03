@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "kk",
+      name: "paw",
       script: "npm",
       args: "start",
     },
