@@ -110,7 +110,7 @@ const OrderHistory: React.FC = () => {
   }, [status])
 
   return (
-    <Container paddingTop='50px' paddingBottom='50px'>
+    <Container paddingTop='50px' paddingBottom='50px' fullWidthResponsiveness={980}>
       <Modal open={!!order} onClose={closeOrderDetailModal}>
         <OrderModal>
           {/* <DetailText>Order Detail</DetailText> */}

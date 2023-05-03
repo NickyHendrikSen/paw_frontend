@@ -87,7 +87,7 @@ const Cart: React.FC = () => {
   }
 
   return (
-    <Container paddingTop='50px' paddingBottom='50px'>
+    <Container paddingTop='50px' paddingBottom='50px' fullWidthResponsiveness={920}>
       <Modal open={checkoutModal} onClose={onCloseModal} >
         <Checkout onClose={onCloseModal} setLoading={setLoading} isLoading={isLoading}/>
       </Modal>
