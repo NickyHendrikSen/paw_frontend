@@ -11,6 +11,7 @@ import EmptyCart from './EmptyCart';
 import Checkout from "../Checkout/Checkout"
 import Loading from '../Loading/Loading';
 import { Modal } from '@mui/material';
+import { Category } from 'paw-global-type';
 
 import {
   LineDivider,
@@ -24,9 +25,7 @@ import {
 type CartState = {
   _product: {
     _id: string,
-    _category: {
-      display_name: string
-    },
+    _category: Category,
     description: string,
     imageUrl: string,
     name: string,
