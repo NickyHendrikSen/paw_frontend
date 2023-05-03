@@ -1,13 +1,9 @@
 import { TitleText } from "@/styles/Typography";
 import Container from "../Template/Container";
 // import { Map } from 'react-store-locator';
-import Link from "next/link";
 
-import {
-  AboutText,
-  StoreNavigation,
-  Highlight
-} from "./Styles"
+
+
 
 const locations = [
   {

@@ -1,5 +1,3 @@
-import Head from 'next/head'
-import Login from "../components/Auth/Login"
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import Header from '@/components/Template/Header';

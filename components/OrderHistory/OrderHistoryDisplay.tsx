@@ -1,5 +1,4 @@
-import { BoldText, TitleText } from "@/styles/Typography";
-import Container from "../Template/Container";
+import { BoldText } from "@/styles/Typography";
 import { OrderState } from "./OrderHistory";
 import { useRouter } from "next/router";
 import { format } from "date-fns";

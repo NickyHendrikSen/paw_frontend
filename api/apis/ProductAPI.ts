@@ -1,5 +1,4 @@
 import { axiosClient } from "../base";
-import objectToUrlEncoded from "@/utils/objectToUrlEncoded";
 
 export const ProductAPI = {
     

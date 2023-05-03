@@ -1,7 +1,5 @@
-import Head from 'next/head'
 import Header from '@/components/Template/Header';
 import AdminRouteGuard from '@/components/Guards/AdminRouteGuard';
-import Cart from '@/components/Cart/Cart';
 import SEO from '@/components/SEO/SEO';
 
 export default function AddProductPage()  {

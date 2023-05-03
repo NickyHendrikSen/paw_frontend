@@ -1,4 +1,4 @@
-import { PureComponent, ReactNode, useCallback, useEffect, useState } from "react";
+import { PureComponent, ReactNode, useCallback, useState } from "react";
 
 type ErrorType = {
   message: string,

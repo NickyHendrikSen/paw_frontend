@@ -1,7 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import NotFound from '@/components/404/NotFound'
 import Header from '@/components/Template/Header'
 import SEO from '@/components/SEO/SEO'
 import { useRouter } from 'next/router'

@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAsync } from "@/utils/useAsync";
 import { CartAPI } from '@/api/apis/CartAPI';
-import { useRouter } from "next/router";
-import Image from 'next/image';
 import { BoldText } from '@/styles/Typography';
 import { BsFillTrashFill } from "react-icons/bs";
 

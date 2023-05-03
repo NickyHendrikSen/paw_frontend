@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAsync } from "@/utils/useAsync";
 import { CartAPI } from "@/api/apis/CartAPI";
 import { loadStripe } from '@stripe/stripe-js';

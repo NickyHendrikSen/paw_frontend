@@ -1,11 +1,11 @@
-import React, { ReactNode, useState } from "react"
+import React, { ReactNode } from "react"
 
 import { 
   InputContainer,
   IconWrapper,
   InputStyles
 } from "./FormInputStyles"
-import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form"
+import { UseFormRegisterReturn } from "react-hook-form"
 
 type FormInputProps = {
   type?: string,

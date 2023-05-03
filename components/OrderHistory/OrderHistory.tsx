@@ -12,7 +12,6 @@ import usePrevious from "@/utils/usePrevious";
 
 import {
   OrderModal,
-  DetailText,
   OrderIdText,
   OrderDateText,
   ShippingInformation,

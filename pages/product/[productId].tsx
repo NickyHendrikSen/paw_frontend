@@ -1,9 +1,7 @@
-import Home from "@/components/Home/Home";
 import ProductDetail from "@/components/ProductDetail/ProductDetail";
 import SEO from "@/components/SEO/SEO";
 import Header from "@/components/Template/Header";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export default function ProductDetailPage() {
   const router = useRouter();
