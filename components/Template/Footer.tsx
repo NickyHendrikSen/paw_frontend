@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
 
   return (
     <FooterSection>
-      <Container paddingTop="64px" paddingBottom="64px">
+      <Container paddingTop="64px" paddingBottom="64px" fullWidthResponsiveness={920}>
         <Wrapper>
           <div>
             <LogoSlogan onClick={goToHome}>
@@ -42,7 +42,6 @@ const Footer: React.FC = () => {
               <div className="slogan">YOUR DOG&apos;S<br />BESTFRIEND</div>
             </LogoSlogan>
           </div>
-          <div>
             <Links>
               <Link href="/product">
                 <span>Products</span>
@@ -54,8 +53,6 @@ const Footer: React.FC = () => {
                 <span>About Us</span>
               </Link>
             </Links>
-          </div>
-          <div>
             <Links>
               <Link href="/policy">
                 <span>Terms and Policy</span>
@@ -64,8 +61,6 @@ const Footer: React.FC = () => {
                 <span>Contact Us</span>
               </Link>
             </Links>
-          </div>
-          <div>
             <Links>
               {
                 authContext?.isAuthenticated() ?
@@ -91,7 +86,6 @@ const Footer: React.FC = () => {
                 </>
               }
             </Links>
-          </div>
         </Wrapper>
         <BottomWrapper>
           <SocialMediaSection>

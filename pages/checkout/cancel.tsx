@@ -3,6 +3,7 @@ import SEO from '@/components/SEO/SEO'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import CheckoutCancel from '@/components/Checkout/CheckoutCancel'
+import Layout from '@/components/Template/Layout'
 
 export default function RegisterPage() {
 
@@ -21,10 +22,9 @@ export default function RegisterPage() {
   if(!isReady) return null;
 
   return (
-    <>
-      <SEO siteTitle="404 Not Found" description="Paw 404 Not Found page"/>
+    <Layout SEO = {{siteTitle: "Checkout Canceled", description: "Checkout Canceled page"}}>
       <Header />
       <CheckoutCancel />
-    </>
+    </Layout>
   )
 }

@@ -14,6 +14,14 @@ export const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 50px;
+
+  @media screen and (max-width: 1150px) {
+    gap: 50px;
+  };
+
+  @media screen and (max-width: 620px) {
+    justify-content: center;
+  }
 `
 
 export const LogoSlogan = styled.div`
@@ -68,6 +76,10 @@ export const Links = styled.div`
         width: calc(100% + 4px);
       }
     }
+  };
+
+  @media screen and (max-width: 620px) {
+    display: none;
   }
 `
 

@@ -4,6 +4,7 @@ import Header from '@/components/Template/Header';
 import Products from '@/components/Products/Products';
 import SEO from '@/components/SEO/SEO';
 import Footer from '@/components/Template/Footer';
+import Layout from '@/components/Template/Layout';
 
 type ParamsStateType = {
   categories: string,
@@ -39,11 +40,8 @@ export default function ProductsPage() {
   if(!params) return null;
   
   return (
-    <>
-      <SEO siteTitle="Products" description="Paw products page"/>
-      <Header />
+    <Layout SEO = {{siteTitle: "Products", description: "Paw products page"}}>
       <Products params={params}/>
-      <Footer />
-    </>
+    </Layout>
   )
 }
