@@ -1,7 +1,5 @@
-import Header from '@/components/Template/Header';
 import RouteGuard from '@/components/Guards/RouteGuard';
 import Cart from '@/components/Cart/Cart';
-import SEO from '@/components/SEO/SEO';
 import Layout from '@/components/Template/Layout';
 
 export default function CartPage()  {

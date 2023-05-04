@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
-import Header from '@/components/Template/Header';
 import Products from '@/components/Products/Products';
-import SEO from '@/components/SEO/SEO';
-import Footer from '@/components/Template/Footer';
 import Layout from '@/components/Template/Layout';
 
 type ParamsStateType = {

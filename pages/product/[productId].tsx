@@ -1,6 +1,4 @@
 import ProductDetail from "@/components/ProductDetail/ProductDetail";
-import SEO from "@/components/SEO/SEO";
-import Header from "@/components/Template/Header";
 import Layout from "@/components/Template/Layout";
 import { useRouter } from "next/router";
 

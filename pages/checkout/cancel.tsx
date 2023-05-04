@@ -1,5 +1,4 @@
 import Header from '@/components/Template/Header'
-import SEO from '@/components/SEO/SEO'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import CheckoutCancel from '@/components/Checkout/CheckoutCancel'
