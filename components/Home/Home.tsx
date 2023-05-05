@@ -18,8 +18,7 @@ const Home: React.FC = () => {
       <br />
       <DescriptionText>Techs : Next.js, Node.js, MongoDB, and Mongoose.</DescriptionText>
       <br />
-      <DescriptionText>Stripe checkout that is used in this website is a test environment meaning that you won&apos;t get charged, 
-        However you can checkout using this test cards provided by Stripe : 
+      <DescriptionText>The Stripe checkout used on this website is a test environment, which means that you will not be charged. However, you can use the following test card provided by Stripe to complete a checkout: 
         <br />Number : 4242 4242 4242 4242
         <br />CVC : Any 3 digits
         <br />Date : Any future date
